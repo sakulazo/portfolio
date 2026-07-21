@@ -1,0 +1,39 @@
+---
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const navLinks: NavLink[] = [
+  { href: "#sobre-mi", label: "Sobre Mí" },
+  { href: "#proyectos", label: "Proyectos" },
+  { href: "#experiencia", label: "Experiencia" },
+  { href: "#contacto", label: "Contacto" },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#" class="text-xl font-bold text-navy">
+      &lt;Lucas Sánchez /&gt;
+    </a>
+    <ul class="hidden md:flex items-center gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-gray-600 hover:text-blue-bright transition-colors font-medium"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <a
+      href="#contacto"
+      class="bg-blue-bright text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-navy transition-colors"
+    >
+      Contáctame
+    </a>
+  </div>
+</nav>

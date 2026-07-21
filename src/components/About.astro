@@ -1,0 +1,70 @@
+---
+interface Skill {
+  name: string;
+  level: number; // 1-5
+  category: string;
+}
+
+interface Props {
+  bio: string;
+  skills: Skill[];
+}
+
+const { bio, skills } = Astro.props;
+
+const categories = [...new Set(skills.map((s) => s.category))];
+---
+
+<section id="sobre-mi" class="py-20 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-navy mb-4">Sobre Mí</h2>
+      <div class="w-20 h-1 bg-blue-bright mx-auto rounded-full" />
+    </div>
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+      <div>
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">{bio}</p>
+        <div class="flex flex-wrap gap-3">
+          <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+            <span class="text-2xl">🎯</span>
+            <span class="text-sm font-medium text-gray-700">+5 años experiencia</span>
+          </div>
+          <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+            <span class="text-2xl">🚀</span>
+            <span class="text-sm font-medium text-gray-700">30+ proyectos</span>
+          </div>
+          <div class="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm">
+            <span class="text-2xl">💡</span>
+            <span class="text-sm font-medium text-gray-700">Aprendizaje continuo</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold text-navy mb-8">Habilidades Técnicas</h3>
+        {categories.map((category) => (
+          <div class="mb-6">
+            <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">{category}</h4>
+            <div class="space-y-3">
+              {skills
+                .filter((s) => s.category === category)
+                .map((skill) => (
+                  <div key={skill.name}>
+                    <div class="flex justify-between mb-1">
+                      <span class="font-medium text-gray-700">{skill.name}</span>
+                      <span class="text-xs text-gray-400">{skill.level}/5</span>
+                    </div>
+                    <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div
+                        class="h-full bg-blue-bright rounded-full transition-all duration-500"
+                        style={`width: ${(skill.level / 5) * 100}%`}
+                      />
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  lang?: string;
+}
+
+const {
+  title = "Desarrollador Web - Portafolio",
+  description = "Desarrollador web full-stack especializado en crear aplicaciones modernas y escalables.",
+  ogImage = "/favicon.svg",
+  lang = "es",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="author" content="Lucas Sánchez" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Structured Data - Person Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Lucas Sánchez",
+      "jobTitle": "Desarrollador Web Full-Stack",
+      "url": "https://lucassanchez.dev",
+      "sameAs": [
+        "https://github.com/lucassanchez",
+        "https://linkedin.com/in/lucassanchez"
+      ],
+      "knowsAbout": [
+        "Desarrollo Web",
+        "React",
+        "TypeScript",
+        "Node.js",
+        "Astro",
+        "Tailwind CSS"
+      ]
+    })}>
+    </script>
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-white text-gray-900 antialiased">
+    <slot />
+  </body>
+</html>

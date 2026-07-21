@@ -1,0 +1,38 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-navy text-white py-12">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <h3 class="text-xl font-bold mb-3">&lt;Lucas Sánchez /&gt;</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">
+          Desarrollador web full-stack apasionado por crear soluciones digitales modernas y eficientes.
+        </p>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">Navegación</h4>
+        <ul class="space-y-2">
+          <li><a href="#sobre-mi" class="text-gray-300 hover:text-white transition-colors text-sm">Sobre Mí</a></li>
+          <li><a href="#proyectos" class="text-gray-300 hover:text-white transition-colors text-sm">Proyectos</a></li>
+          <li><a href="#experiencia" class="text-gray-300 hover:text-white transition-colors text-sm">Experiencia</a></li>
+          <li><a href="#contacto" class="text-gray-300 hover:text-white transition-colors text-sm">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">Contacto</h4>
+        <ul class="space-y-2">
+          <li><a href="mailto:lucas@example.com" class="text-gray-300 hover:text-white transition-colors text-sm">lucas@example.com</a></li>
+          <li><a href="https://github.com/lucassanchez" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors text-sm">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/lucassanchez" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white transition-colors text-sm">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 pt-8 text-center">
+      <p class="text-gray-400 text-sm">
+        &copy; {currentYear} Lucas Sánchez. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

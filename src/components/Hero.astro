@@ -1,0 +1,52 @@
+---
+interface Props {
+  name: string;
+  title: string;
+  subtitle: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const { name, title, subtitle, ctaText = "Ver Proyectos", ctaLink = "#proyectos" } = Astro.props;
+---
+
+<section class="min-h-screen flex items-center justify-center bg-white pt-16">
+  <div class="text-center max-w-4xl mx-auto px-6">
+    <div class="inline-flex items-center gap-2 bg-blue-50 text-blue-bright px-4 py-2 rounded-full text-sm font-medium mb-8">
+      <span class="w-2 h-2 bg-blue-bright rounded-full animate-pulse" />
+      Disponible para trabajar
+    </div>
+    <h1 class="text-5xl md:text-7xl font-bold text-navy mb-4 leading-tight">
+      {name}
+    </h1>
+    <p class="text-2xl md:text-3xl text-blue-bright font-semibold mb-6">
+      {title}
+    </p>
+    <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+      {subtitle}
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={ctaLink}
+        class="bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-navy transition-colors shadow-lg shadow-blue-200 hover:shadow-blue-300"
+      >
+        {ctaText}
+      </a>
+      <a
+        href="#contacto"
+        class="border-2 border-blue-bright text-blue-bright px-8 py-3.5 rounded-lg font-semibold hover:bg-blue-bright hover:text-white transition-colors"
+      >
+        Contáctame
+      </a>
+    </div>
+    <div class="mt-16 flex items-center justify-center gap-8 text-gray-400">
+      <span class="text-sm font-medium uppercase tracking-wider">Tecnologías</span>
+      <div class="flex items-center gap-6 text-gray-500">
+        <span class="text-lg font-semibold hover:text-blue-bright transition-colors">React</span>
+        <span class="text-lg font-semibold hover:text-blue-bright transition-colors">TypeScript</span>
+        <span class="text-lg font-semibold hover:text-blue-bright transition-colors">Node.js</span>
+        <span class="text-lg font-semibold hover:text-blue-bright transition-colors">Astro</span>
+      </div>
+    </div>
+  </div>
+</section>
