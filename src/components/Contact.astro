@@ -126,7 +126,7 @@ const { email, linkedin, github, phone } = Astro.props;
           const form = document.getElementById('contact-form') as HTMLFormElement;
           const successMsg = document.getElementById('form-success');
 
-          function onFormSubmit(e: Event) {
+          form?.addEventListener('submit', (e) => {
             e.preventDefault();
             const data = new FormData(form);
             const response = data.get('h-captcha-response');
@@ -145,23 +145,7 @@ const { email, linkedin, github, phone } = Astro.props;
                   successMsg?.classList.remove('hidden');
                 }
               });
-          }
-
-          form?.addEventListener('submit', onFormSubmit);
-
-          function initHcaptcha() {
-            if (typeof hcaptcha !== 'undefined') {
-              hcaptcha.render(document.querySelector('.h-captcha'), {
-                sitekey: document.querySelector('.h-captcha')?.getAttribute('data-sitekey'),
-              });
-            }
-          }
-
-          if (typeof hcaptcha !== 'undefined') {
-            initHcaptcha();
-          } else {
-            window.addEventListener('load', initHcaptcha);
-          }
+          });
         </script>
       </div>
     </div>
