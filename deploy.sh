@@ -23,6 +23,6 @@ pnpm build
 # Deploy
 echo "Subiendo al VPS..."
 tar czf - -C dist . | ssh "$REMOTE" \
-  "mkdir -p /tmp/portfolio-deploy && tar xzf - -C /tmp/portfolio-deploy && sudo cp -a /tmp/portfolio-deploy/* $REMOTE_DIR/ && sudo chown -R www-data:www-data $REMOTE_DIR"
+  "mkdir -p /tmp/portfolio-deploy && tar xzf - -C /tmp/portfolio-deploy && sudo cp -a /tmp/portfolio-deploy/* $REMOTE_DIR/ && sudo chown -R www-data:www-data $REMOTE_DIR && sudo chmod -R 755 $REMOTE_DIR"
 
 echo "Desplegado en https://portfolio.sakulazo.com"
