@@ -1,46 +1,51 @@
-# Astro Starter Kit: Basics
+# Portfolio - Lucas Sanchez
 
-```sh
-npm create astro@latest -- --template basics
-```
+Sitio web personal de portfolio desarrollado con Astro y Tailwind CSS.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura del proyecto
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+├── src/
+│   ├── components/     # Componentes Astro (Navbar, Hero, About, etc.)
+│   ├── layouts/        # Layout principal
+│   ├── pages/          # Paginas (index.astro)
+│   └── styles/         # Estilos globales (Tailwind)
+├── public/             # Assets estaticos (favicon)
+├── deploy.sh           # Script de despliegue
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Comandos
 
-## 🧞 Commands
+| Comando             | Accion                                       |
+| :------------------ | :------------------------------------------- |
+| `pnpm install`      | Instala dependencias                         |
+| `pnpm dev`          | Inicia servidor local en `localhost:4321`    |
+| `pnpm build`        | Genera el sitio estatico en `./dist/`        |
+| `pnpm preview`      | Previsualiza el build localmente             |
+| `./deploy.sh "msg"` | Commitea, buildea y despliega al VPS         |
 
-All commands are run from the root of the project, from a terminal:
+## Despliegue
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+El sitio se despliega como archivos estaticos servidos por Caddy en Docker.
 
-## 👀 Want to learn more?
+### Flujo
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```
+./deploy.sh "fix: mobile scroll"
+```
+
+1. **Git** - `add` + `commit` + `push` automaticos
+2. **Build** - `pnpm build` genera `dist/`
+3. **Deploy** - Sube `dist/` al VPS vía SSH y Caddy lo sirve
+
+### Requisitos
+
+- SSH configurado con alias `vps-manager`
+- `pnpm` instalado
+- Acceso sudo sin contraseña a `cp`, `chown`, `mkdir` en el VPS
+
+### URL
+
+https://portfolio.sakulazo.com
