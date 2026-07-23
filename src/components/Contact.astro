@@ -109,6 +109,9 @@ const { email, linkedin, github, phone } = Astro.props;
             class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-blue-bright focus:ring-2 focus:ring-blue-100 outline-none transition-all resize-none"
             required
           ></textarea>
+          <div class="flex justify-center">
+            <div class="h-captcha" data-sitekey={import.meta.env.PORTFOLIO_HCAPTCHA_KEY}></div>
+          </div>
           <button
             type="submit"
             class="w-full bg-blue-bright text-white py-3.5 rounded-lg font-semibold hover:bg-navy transition-colors shadow-lg shadow-blue-200 hover:shadow-blue-300"
@@ -122,19 +125,43 @@ const { email, linkedin, github, phone } = Astro.props;
         <script>
           const form = document.getElementById('contact-form') as HTMLFormElement;
           const successMsg = document.getElementById('form-success');
-          form?.addEventListener('submit', async (e) => {
+
+          function onFormSubmit(e: Event) {
             e.preventDefault();
             const data = new FormData(form);
-            const res = await fetch('https://api.web3forms.com/submit', {
+            const response = data.get('h-captcha-response');
+            if (!response) {
+              alert('Por favor, completa el captcha.');
+              return;
+            }
+            fetch('https://api.web3forms.com/submit', {
               method: 'POST',
               body: data,
-            });
-            const json = await res.json();
-            if (json.success) {
-              form.style.display = 'none';
-              successMsg?.classList.remove('hidden');
+            })
+              .then((res) => res.json())
+              .then((json) => {
+                if (json.success) {
+                  form.style.display = 'none';
+                  successMsg?.classList.remove('hidden');
+                }
+              });
+          }
+
+          form?.addEventListener('submit', onFormSubmit);
+
+          function initHcaptcha() {
+            if (typeof hcaptcha !== 'undefined') {
+              hcaptcha.render(document.querySelector('.h-captcha'), {
+                sitekey: document.querySelector('.h-captcha')?.getAttribute('data-sitekey'),
+              });
             }
-          });
+          }
+
+          if (typeof hcaptcha !== 'undefined') {
+            initHcaptcha();
+          } else {
+            window.addEventListener('load', initHcaptcha);
+          }
         </script>
       </div>
     </div>
