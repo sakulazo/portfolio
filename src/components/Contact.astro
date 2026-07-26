@@ -75,7 +75,7 @@ const { email, linkedin, github, phone } = Astro.props;
 
       <!-- Contact form card -->
       <div class="mt-12 bg-gray-50 rounded-2xl p-8 md:p-12">
-        <h3 class="text-2xl font-semibold text-navy mb-6 text-center">Envíame un mensaje</h3>
+        <h3 id="form-title" class="text-2xl font-semibold text-navy mb-6 text-center">Envíame un mensaje</h3>
         <form
           action="https://api.web3forms.com/submit"
           method="POST"
@@ -142,6 +142,8 @@ const { email, linkedin, github, phone } = Astro.props;
               .then((json) => {
                 if (json.success) {
                   form.style.display = 'none';
+                  const title = document.getElementById('form-title');
+                  if (title) title.textContent = 'Mensaje enviado';
                   successMsg?.classList.remove('hidden');
                 }
               });
