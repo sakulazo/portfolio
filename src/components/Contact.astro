@@ -110,7 +110,7 @@ const { email, linkedin, github, phone } = Astro.props;
             required
           ></textarea>
           <div class="flex justify-center">
-            <div class="h-captcha" data-sitekey={import.meta.env.PORTFOLIO_HCAPTCHA_KEY}></div>
+            <div class="h-captcha" data-captcha="true"></div>
           </div>
           <button
             type="submit"
