@@ -8,4 +8,11 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: 'https://portfolio.sakulazo.com',
+  i18n: {
+    locales: ['es', 'en'],
+    defaultLocale: 'es',
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

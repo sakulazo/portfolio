@@ -7,141 +7,27 @@ import Projects from '../components/Projects.astro';
 import Experience from '../components/Experience.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-
-const skills = [
-  // Frontend
-  { name: "React", level: 5, category: "Frontend" },
-  { name: "TypeScript", level: 5, category: "Frontend" },
-  { name: "Next.js", level: 4, category: "Frontend" },
-  { name: "Tailwind CSS", level: 5, category: "Frontend" },
-  { name: "HTML/CSS", level: 5, category: "Frontend" },
-  { name: "Astro", level: 4, category: "Frontend" },
-  // Backend
-  { name: "Node.js", level: 4, category: "Backend" },
-  { name: "Python", level: 3, category: "Backend" },
-  { name: "PostgreSQL", level: 4, category: "Backend" },
-  { name: "REST APIs", level: 4, category: "Backend" },
-  // Herramientas
-  { name: "Git", level: 5, category: "Herramientas" },
-  { name: "Docker", level: 3, category: "Herramientas" },
-  { name: "VS Code", level: 5, category: "Herramientas" },
-  { name: "Figma", level: 3, category: "Herramientas" },
-  { name: "Linux", level: 4, category: "Herramientas" },
-];
-
-const projects = [
-  {
-    title: "TaskFlow",
-    description: "Aplicación de gestión de proyectos con tablero Kanban, seguimiento de tiempo y colaboración en tiempo real.",
-    techStack: ["React", "TypeScript", "Node.js", "PostgreSQL", "WebSocket"],
-    liveUrl: "https://taskflow-demo.vercel.app",
-    repoUrl: "https://github.com/sakulazo/taskflow",
-  },
-  {
-    title: "DevShare",
-    description: "Plataforma social para desarrolladores donde compartir código, snippets y colaborar en proyectos open-source.",
-    techStack: ["Next.js", "TypeScript", "Prisma", "Tailwind", "Redis"],
-    liveUrl: "https://devshare.vercel.app",
-    repoUrl: "https://github.com/sakulazo/devshare",
-  },
-  {
-    title: "ShopEase",
-    description: "E-commerce moderno con carrito de compras, pasarela de pago integrada y panel de administración completo.",
-    techStack: ["React", "Node.js", "MongoDB", "Stripe", "Cloudinary"],
-    liveUrl: "https://shopease-demo.netlify.app",
-    repoUrl: "https://github.com/sakulazo/shopease",
-  },
-  {
-    title: "WeatherNow",
-    description: "App del clima con pronóstico semanal, mapas interactivos y alertas personalizadas usando OpenWeather API.",
-    techStack: ["React", "TypeScript", "Chart.js", "OpenWeather API"],
-    liveUrl: "https://weathernow-app.vercel.app",
-    repoUrl: "https://github.com/sakulazo/weathernow",
-  },
-  {
-    title: "BlogStack",
-    description: "Blog platform con markdown, editor enriquecido, comentarios y sistema de tags para contenido técnico.",
-    techStack: ["Astro", "MDX", "Tailwind", "SQLite", "Algolia"],
-    liveUrl: "https://blogstack.vercel.app",
-    repoUrl: "https://github.com/sakulazo/blogstack",
-  },
-  {
-    title: "FitTrack",
-    description: "Aplicación de seguimiento fitness con rutinas personalizadas, progreso visual y recomendaciones basadas en IA.",
-    techStack: ["React Native", "TypeScript", "Firebase", "TensorFlow"],
-    liveUrl: "https://fittrack-app.com",
-    repoUrl: "https://github.com/sakulazo/fittrack",
-  },
-];
-
-const jobs = [
-  {
-    company: "TechCorp Solutions",
-    position: "Desarrollador Full-Stack Senior",
-    period: "Ene 2024 - Presente",
-    description: "Lideré el desarrollo de aplicaciones web escalables para clientes empresariales, mejorando la eficiencia del equipo y la calidad del código.",
-    achievements: [
-      "Migré 5 aplicaciones legacy a Next.js + TypeScript, reduciendo el tiempo de carga en un 40%",
-      "Implementé CI/CD con GitHub Actions, reduciendo bugs en producción en un 60%",
-      "Mentoricé a 3 desarrolladores juniors en buenas prácticas y code review",
-    ],
-  },
-  {
-    company: "StartupHub",
-    position: "Desarrollador Frontend",
-    period: "Mar 2022 - Dic 2023",
-    description: "Desarrollé interfaces de usuario modernas y responsivas para productos SaaS en etapa temprana.",
-    achievements: [
-      "Construí el diseño system completo del producto principal usando React + Tailwind",
-      "Optimice el rendimiento del frontend logrando un score de 95+ en Lighthouse",
-      "Integré APIs REST y GraphQL para mejorar la experiencia del usuario",
-    ],
-  },
-  {
-    company: "Digital Agency",
-    position: "Desarrollador Web Junior",
-    period: "Jun 2020 - Feb 2022",
-    description: "Creé sitios web y landing pages para clientes de diversos sectores, enfocándome en diseño responsivo y SEO.",
-    achievements: [
-      "Entregué 20+ proyectos a tiempo, manteniendo un 98% de satisfacción del cliente",
-      "Implementé optimizaciones SEO que mejoraron el tráfico orgánico en un 150%",
-      "Automatizé flujos de trabajo de desarrollo reduciendo tiempos de entrega en un 30%",
-    ],
-  },
-];
+import es from '../i18n/es';
 ---
 
 <Layout
-  title="Lucas Sánchez | Desarrollador Web Full-Stack"
-  description="Desarrollador web full-stack especializado en React, TypeScript, Node.js y Astro. Creo aplicaciones modernas, escalables y de alto rendimiento."
+  title={es.siteTitle}
+  description={es.siteDescription}
+  lang="es"
 >
-  <Navbar />
+  <Navbar t={es} currentLang="es" />
   <main>
-    <Hero
-      name="Lucas Sánchez"
-      title="Desarrollador Web Full-Stack"
-      subtitle="Construyo aplicaciones web modernas y escalables con tecnologías de vanguardia. Especializado en React, TypeScript, Node.js y el ecosistema Jamstack."
-    />
-    <About
-      bio={`
-        Soy un desarrollador web full-stack con más de 5 años de experiencia creando aplicaciones 
-        digitales modernas y escalables. Me apasiona transformar ideas en productos funcionales 
-        utilizando las mejores prácticas de desarrollo y las tecnologías más recientes.
-
-        Mi enfoque combina un sólido conocimiento técnico con una mentalidad centrada en el usuario, 
-        asegurando que cada proyecto no solo funcione perfectamente, sino que también ofrezca una 
-        experiencia excepcional. Siempre estoy buscando nuevos desafíos que me permitan crecer 
-        profesionalmente y aportar valor a los equipos con los que trabajo.
-      `}
-      skills={skills}
-    />
-    <Projects projects={projects} />
-    <Experience jobs={jobs} />
+    <Hero t={es} />
+    <About t={es} />
+    <Projects t={es} />
+    <Experience t={es} />
     <Contact
+      t={es}
       email="lucassanchezacosta@gmail.com"
       linkedin="https://www.linkedin.com/in/lucas-s%C3%A1nchez-dev"
       github="https://github.com/sakulazo"
+      phone="+34 637449107"
     />
   </main>
-  <Footer />
+  <Footer t={es} />
 </Layout>
