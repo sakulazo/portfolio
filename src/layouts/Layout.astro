@@ -5,19 +5,17 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
-  lang?: string;
 }
 
 const {
   title = "Lucas Sánchez | Desarrollador Web · SDD & Automatización con IA",
   description = "Técnico Superior en Desarrollo Web especializado en SDD, automatización con IA y desarrollo de aplicaciones web con PHP, Laravel y JavaScript.",
   ogImage = "https://portfolio.sakulazo.com/og-image.png",
-  lang = "es",
 } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,7 +51,7 @@ const {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Lucas Sánchez",
-      "jobTitle": lang === 'en' ? 'Web Developer · SDD & AI Automation' : 'Desarrollador Web · SDD & Automatización con IA',
+      "jobTitle": "Desarrollador Web · SDD & Automatización con IA",
       "url": "https://portfolio.sakulazo.com",
       "sameAs": [
         "https://github.com/sakulazo",

@@ -1,15 +1,10 @@
 ---
-import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
 
-interface Props {
-  t: Translations;
-}
-
-const { t } = Astro.props;
-const { title, jobs } = t.experience;
+const { title, jobs } = site.experience;
 ---
 
-<section id={t.lang === 'es' ? 'experiencia' : 'experience'} class="py-20 bg-gray-50 dark:bg-slate-800">
+<section id="experiencia" class="py-20 bg-gray-50 dark:bg-slate-800">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold text-navy dark:text-slate-100 mb-4">{title}</h2>

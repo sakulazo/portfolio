@@ -1,15 +1,10 @@
 ---
-import type { Translations } from '../i18n/types';
+import { site } from '../data/site';
 
-interface Props {
-  t: Translations;
-}
-
-const { t } = Astro.props;
-const { title, subtitle, demo, code, items } = t.projects;
+const { title, subtitle, demo, code, items } = site.projects;
 ---
 
-<section id={t.lang === 'es' ? 'proyectos' : 'projects'} class="py-20 bg-white dark:bg-slate-900">
+<section id="proyectos" class="py-20 bg-white dark:bg-slate-900">
   <div class="max-w-6xl mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold text-navy dark:text-slate-100 mb-4">{title}</h2>
@@ -23,7 +18,15 @@ const { title, subtitle, demo, code, items } = t.projects;
         <div class="group border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden hover:shadow-xl dark:hover:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 bg-white dark:bg-slate-800">
           <div class="relative overflow-hidden">
             <div class="w-full h-48 bg-gradient-to-br from-navy to-blue-bright flex items-center justify-center">
-              <span class="text-white text-4xl font-bold opacity-30">{project.title.charAt(0)}</span>
+              {project.logo ? (
+                <img
+                  src={project.logo}
+                  alt={`${project.title} logo`}
+                  class={`${project.logo === '/gestaller-logo.svg' ? 'h-[8.4rem]' : 'h-28'} w-auto drop-shadow-md transition-transform duration-300 group-hover:scale-[1.2]`}
+                />
+              ) : (
+                <span class="text-white text-4xl font-bold opacity-30">{project.title.charAt(0)}</span>
+              )}
             </div>
           </div>
           <div class="p-6">
