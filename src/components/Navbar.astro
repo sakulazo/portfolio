@@ -99,7 +99,7 @@ const navIcons: Record<string, string> = {
   </div>
 </nav>
 
-<script>
+<script client:load>
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   const bar1 = document.getElementById('bar-1');
@@ -109,27 +109,47 @@ const navIcons: Record<string, string> = {
 
   let open = false;
 
-  function update() {
-    if (open) {
-      menu?.classList.add('duration-500');
-      menu?.classList.remove('duration-200');
-      menu?.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
-      menu?.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
-      bar1?.classList.add('rotate-45', 'translate-y-2');
-      bar2?.classList.add('opacity-0');
-      bar3?.classList.add('-rotate-45', '-translate-y-2');
-      toggle?.setAttribute('aria-label', 'Cerrar menú');
-    } else {
-      menu?.classList.add('duration-200');
-      menu?.classList.remove('duration-500');
-      menu?.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
-      menu?.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
-      bar1?.classList.remove('rotate-45', 'translate-y-2');
-      bar2?.classList.remove('opacity-0');
-      bar3?.classList.remove('-rotate-45', '-translate-y-2');
-      toggle?.setAttribute('aria-label', 'Abrir menú');
-    }
+function closeMenu() {
+  open = false;
+  // refetch elements in case the DOM was re‑rendered
+  const menuEl = document.getElementById('mobile-menu');
+  const bar1El = document.getElementById('bar-1');
+  const bar2El = document.getElementById('bar-2');
+  const bar3El = document.getElementById('bar-3');
+  const toggleEl = document.getElementById('menu-toggle');
+  if (!menuEl) return;
+  menuEl.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+  menuEl.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+  menuEl.classList.remove('duration-500', 'duration-200');
+  bar1El?.classList.remove('rotate-45', 'translate-y-2');
+  bar2El?.classList.remove('opacity-0');
+  bar3El?.classList.remove('-rotate-45', '-translate-y-2');
+  toggleEl?.setAttribute('aria-label', 'Abrir menú');
+}
+
+function update() {
+  if (open) {
+    menu?.classList.add('duration-500');
+    menu?.classList.remove('duration-200');
+    menu?.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    menu?.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+    bar1?.classList.add('rotate-45', 'translate-y-2');
+    bar2?.classList.add('opacity-0');
+    bar3?.classList.add('-rotate-45', '-translate-y-2');
+    toggle?.setAttribute('aria-label', 'Cerrar menú');
+  } else {
+    menu?.classList.add('duration-200');
+    menu?.classList.remove('duration-500');
+menu?.classList.remove('duration-500', 'duration-200');
+
+    menu?.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+    bar1?.classList.remove('rotate-45', 'translate-y-2');
+    bar2?.classList.remove('opacity-0');
+    bar3?.classList.remove('-rotate-45', '-translate-y-2');
+    toggle?.setAttribute('aria-label', 'Abrir menú');
   }
+}
+
 
   toggle?.addEventListener('click', () => {
     open = !open;
@@ -143,20 +163,29 @@ const navIcons: Record<string, string> = {
     });
   });
 
-  function applyTheme(isLight) {
-    document.documentElement.classList.toggle('dark', !isLight);
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    const switches = document.querySelectorAll('.theme-switch-input');
-    switches.forEach((input) => {
-      input.checked = isLight;
-      input.setAttribute('aria-label', isLight ? 'Activar modo oscuro' : 'Activar modo claro');
-    });
-  }
+function applyTheme(isLight) {
+  console.log('applyTheme called, isLight', isLight);
+  // Close menu immediately when theme changes
+  open = false;
+  update();
+  
+  document.documentElement.classList.toggle('dark', !isLight);
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  const switches = document.querySelectorAll('.theme-switch-input');
+  switches.forEach((input) => {
+    input.checked = isLight;
+    input.setAttribute('aria-label', isLight ? 'Activar modo oscuro' : 'Activar modo claro');
+  });
+}
+
 
   document.querySelectorAll('.theme-switch-input').forEach((input) => {
     input.checked = !document.documentElement.classList.contains('dark');
     input.setAttribute('aria-label', input.checked ? 'Activar modo oscuro' : 'Activar modo claro');
-    input.addEventListener('change', () => applyTheme(input.checked));
+    input.addEventListener('change', () => {
+  closeMenu();
+  applyTheme(input.checked);
+});
   });
 </script>
 
