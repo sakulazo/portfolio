@@ -61,6 +61,7 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
       'Aplicaciones web reales, desde la planificación hasta el despliegue en producción.',
     demo: 'Demo',
     code: 'Código',
+    visit: 'Ir a página',
     items: [
       {
         title: 'GesTaller',
