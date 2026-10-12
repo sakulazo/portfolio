@@ -47,8 +47,8 @@ make deploy MSG="fix: mobile scroll"
 
 ### Requisitos
 
-- Clave SSH `~/.ssh/id_ed25519` autorizada en el VPS
-- `sakulito` con sudo sin contraseña en el VPS
+- Clave SSH autorizada en el VPS
+- Usuario con sudo sin contraseña en el VPS
 - `pnpm` instalado localmente
 
 ### URL
