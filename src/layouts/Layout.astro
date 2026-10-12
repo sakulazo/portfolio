@@ -17,6 +17,10 @@ const {
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
@@ -75,4 +79,46 @@ const {
   <body class="bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 antialiased">
     <slot />
   </body>
+
+  <script>
+    const revealEls = [...document.querySelectorAll('.js-reveal')];
+
+    if (revealEls.length) {
+      let lastScrollY = window.scrollY;
+      let ticking = false;
+
+      function revealVisible() {
+        const viewportLimit = window.innerHeight * 0.85;
+        const goingDown = window.scrollY >= lastScrollY;
+
+        revealEls.forEach((el) => {
+          if (goingDown && !el.classList.contains('is-visible')) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < viewportLimit) {
+              el.classList.add('is-visible');
+            }
+          }
+        });
+
+        lastScrollY = window.scrollY;
+      }
+
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(() => {
+              revealVisible();
+              ticking = false;
+            });
+          }
+        },
+        { passive: true }
+      );
+
+      window.addEventListener('resize', revealVisible, { passive: true });
+      revealVisible();
+    }
+  </script>
 </html>

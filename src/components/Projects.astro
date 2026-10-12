@@ -4,8 +4,8 @@ import { site } from '../data/site';
 const { title, subtitle, demo, code, items } = site.projects;
 ---
 
-<section id="proyectos" class="py-20 bg-white dark:bg-slate-900">
-  <div class="max-w-6xl mx-auto px-6">
+<section id="proyectos" class="py-20 min-h-dvh bg-white dark:bg-linear-to-br dark:from-slate-950 dark:to-slate-700">
+  <div class="js-reveal max-w-6xl mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold text-navy dark:text-slate-100 mb-4">{title}</h2>
       <div class="w-20 h-1 bg-blue-bright mx-auto rounded-full mb-4" />
@@ -15,7 +15,7 @@ const { title, subtitle, demo, code, items } = site.projects;
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {items.map((project) => (
-        <div class="group border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden hover:shadow-xl dark:hover:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 bg-white dark:bg-slate-800">
+        <div class="group relative border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden hover:shadow-xl dark:hover:shadow-slate-900/50 transition-all duration-300 hover:-translate-y-1 bg-white dark:bg-slate-800">
           <div class="relative overflow-hidden">
             <div class="w-full h-48 bg-gradient-to-br from-navy to-blue-bright flex items-center justify-center">
               {project.logo ? (
@@ -39,7 +39,7 @@ const { title, subtitle, demo, code, items } = site.projects;
                 </span>
               ))}
             </div>
-            <div class="flex gap-4 pt-2 border-t border-gray-100 dark:border-slate-700">
+            <div class="flex gap-4 pt-2 border-t border-gray-100 dark:border-slate-700 relative z-20">
               <a
                 href={project.liveUrl}
                 target="_blank"
@@ -64,6 +64,15 @@ const { title, subtitle, demo, code, items } = site.projects;
               </a>
             </div>
           </div>
+          {project.wholeCard && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="absolute inset-0 z-10"
+              aria-label={`Abrir ${project.title} en otra pestaña`}
+            />
+          )}
         </div>
       ))}
     </div>

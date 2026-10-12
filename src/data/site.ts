@@ -24,7 +24,7 @@ export const site = {
   },
 
   about: {
-    title: 'Sobre Mí',
+    title: 'Sobre mí',
     bio: `Técnico Superior en Desarrollo Web con formación técnica en sistemas informáticos y una trayectoria previa en dirección empresarial y consultoría IT.
 
 Mi enfoque actual se centra en el desarrollo guiado por especificaciones (SDD) y el uso estratégico de IA generativa para optimizar el ciclo de vida del software. Gestiono mi propia infraestructura Linux en VPS con Docker, hardening y alta disponibilidad, y automatizo despliegues con Bash.
@@ -39,16 +39,14 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
   },
 
   skills: [
-    { name: 'Laravel', level: 9.2, category: 'STACKs' },
-    { name: 'JavaScript', level: 9, category: 'STACKs' },
     { name: 'Python', level: 8.3, category: 'STACKs' },
-    { name: 'Tailwind', level: 7.7, category: 'STACKs' },
     { name: 'React', level: 8, category: 'STACKs' },
+    { name: 'JavaScript', level: 9, category: 'STACKs' },
     { name: 'API REST', level: 9, category: 'STACKs' },
     { name: 'SDD', level: 9.1, category: 'Metodologías' },
     { name: 'Desarrollo Asistido por IA', level: 9, category: 'Metodologías' },
     { name: 'Automatización SDLC', level: 8, category: 'Metodologías' },
-    { name: 'Multiagentes IA', level: 8, category: 'IA y Automatización' },
+    { name: 'Multiagentes IA', level: 8.8, category: 'IA y Automatización' },
     { name: 'OpenCode', level: 9.4, category: 'IA y Automatización' },
     { name: 'Bash Scripting', level: 9, category: 'IA y Automatización' },
     { name: 'Docker', level: 9.8, category: 'Sistemas e Infraestructura' },
@@ -72,6 +70,7 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         liveUrl: 'https://demo-gestaller.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/gestaller-web',
         logo: '/gestaller-logo.svg',
+        wholeCard: false,
       },
       {
         title: 'Silika',
@@ -81,6 +80,7 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         liveUrl: 'https://silika.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/silika',
         logo: '/silika-logo.svg',
+        wholeCard: true,
       },
       {
         title: 'sakulazo.com',
@@ -90,6 +90,7 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         liveUrl: 'https://sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/sakulazo.com',
         logo: '/sakulazo-logo.svg',
+        wholeCard: false,
       },
     ],
   },
@@ -137,8 +138,7 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
 
   contact: {
     title: 'Contacto',
-    subtitle:
-      '¿Tienes un proyecto en mente o quieres saber más sobre mi trabajo? Estoy abierto a conversar.',
+    subtitle: '¿Tienes un proyecto en mente o quieres saber más sobre mi trabajo?',
     formTitle: 'Envíame un mensaje',
     formName: 'Tu nombre',
     formEmail: 'Tu email',

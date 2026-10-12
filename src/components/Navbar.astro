@@ -2,20 +2,28 @@
 import { site } from '../data/site';
 
 const { links } = site.nav;
+
+const navIcons: Record<string, string> = {
+  'Sobre Mí': '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  Proyectos: '<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>',
+  Experiencia: '<rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  Contacto: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+};
 ---
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800">
-  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold text-navy dark:text-slate-100">
-      &lt;Lucas Sánchez /&gt;
+  <div class="w-[90%] mx-auto px-3 h-16 flex items-center justify-between">
+    <a href="#inicio" class="text-xl font-bold text-navy dark:text-slate-100">
+      {"{Lucas: Sánchez/}"}
     </a>
     <ul class="hidden md:flex items-center gap-8">
       {links.map((link) => (
         <li>
           <a
             href={link.href}
-            class="text-gray-600 dark:text-slate-300 hover:text-blue-bright dark:hover:text-blue-bright transition-colors font-medium"
+            class="flex items-center gap-2 text-gray-600 dark:text-slate-300 hover:text-blue-bright dark:hover:text-blue-bright transition-colors font-medium"
           >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" set:html={navIcons[link.label]} />
             {link.label}
           </a>
         </li>
@@ -53,15 +61,16 @@ const { links } = site.nav;
   </div>
   <div
     id="mobile-menu"
-    class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800"
+    class="md:hidden absolute top-full left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-gray-100 dark:border-slate-800 shadow-md -translate-y-full opacity-0 pointer-events-none transition-all duration-500 ease-in-out"
   >
     <ul class="flex flex-col items-center gap-4 py-6">
       {links.map((link) => (
         <li>
           <a
             href={link.href}
-            class="mobile-nav-link text-gray-600 dark:text-slate-300 hover:text-blue-bright dark:hover:text-blue-bright transition-colors font-medium text-lg"
+            class="mobile-nav-link flex items-center gap-2 text-gray-600 dark:text-slate-300 hover:text-blue-bright dark:hover:text-blue-bright transition-colors font-medium text-lg"
           >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" set:html={navIcons[link.label]} />
             {link.label}
           </a>
         </li>
@@ -102,13 +111,19 @@ const { links } = site.nav;
 
   function update() {
     if (open) {
-      menu?.classList.remove('hidden');
+      menu?.classList.add('duration-500');
+      menu?.classList.remove('duration-200');
+      menu?.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      menu?.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
       bar1?.classList.add('rotate-45', 'translate-y-2');
       bar2?.classList.add('opacity-0');
       bar3?.classList.add('-rotate-45', '-translate-y-2');
       toggle?.setAttribute('aria-label', 'Cerrar menú');
     } else {
-      menu?.classList.add('hidden');
+      menu?.classList.add('duration-200');
+      menu?.classList.remove('duration-500');
+      menu?.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+      menu?.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
       bar1?.classList.remove('rotate-45', 'translate-y-2');
       bar2?.classList.remove('opacity-0');
       bar3?.classList.remove('-rotate-45', '-translate-y-2');
