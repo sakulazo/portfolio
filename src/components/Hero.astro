@@ -1,12 +1,15 @@
 ---
+import { Image } from 'astro:assets';
 import { site } from '../data/site';
+import foto from '../assets/yo_bien_cortado.png';
 
 const { available, role, description, ctaText, contactText, techLabel } = site.hero;
 const roleParts = role.split(' & ');
 ---
 
 <section id="inicio" class="min-h-dvh flex items-center justify-center bg-white dark:bg-linear-to-br dark:from-slate-950 dark:to-slate-700 pt-32 sm:pt-16">
-  <div class="js-reveal text-center max-w-4xl mx-auto px-6">
+  <div class="js-reveal max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-x-12 items-center">
+    <div class="order-2 lg:order-1 text-center">
     <div class="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-bright dark:text-blue-400 px-4 py-2 rounded-full text-sm font-medium mb-8">
       <span class="w-2 h-2 bg-blue-bright dark:bg-blue-400 rounded-full animate-pulse" />
       {available}
@@ -14,7 +17,7 @@ const roleParts = role.split(' & ');
     <h1 class="text-5xl md:text-7xl font-bold text-navy dark:text-slate-100 mb-4 leading-tight">
       Lucas Sánchez
     </h1>
-    <p class="text-2xl md:text-3xl text-blue-bright font-semibold mb-6">
+    <p class="text-2xl md:text-3xl text-blue-bright font-semibold mb-6 text-center">
       {roleParts.length === 2 ? (
         <>
           {roleParts[0]} &<br class="md:hidden" /> {roleParts[1]}
@@ -23,9 +26,12 @@ const roleParts = role.split(' & ');
         role
       )}
     </p>
-    <p class="text-lg text-gray-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+    <p class="text-lg text-gray-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto text-left leading-relaxed">
       {description}
     </p>
+    </div>
+
+    <div class="order-3 lg:col-span-2">
     <div class="flex flex-col md:flex-row items-center justify-center gap-4">
       <a
         href="/Lucas_Sanchez_Acosta_CV.pdf"
@@ -133,6 +139,19 @@ const roleParts = role.split(' & ');
           </svg>
         </span>
       </div>
+    </div>
+    </div>
+
+    <div class="order-1 lg:order-2 flex justify-center">
+      <Image
+        src={foto}
+        alt="Lucas Sánchez, desarrollador web"
+        width={420}
+        height={600}
+        loading="eager"
+        fetchpriority="high"
+        class="w-64 sm:w-80 lg:w-full max-w-sm rounded-2xl mask-b-from-85% dark:mask-b-from-70%"
+      />
     </div>
   </div>
 </section>

@@ -14,9 +14,9 @@ REMOTE_OWNER := www-data
 BUILD_CMD    := pnpm build
 
 # ── Infraestructura SSH (común) ───────────────────────────────────────
-SSH_HOST   := sakulito@185.214.134.40
-SSH_PORT   := 42932
-SSH_KEY    := $(HOME)/.ssh/id_ed25519
+SSH_HOST   := vps
+SSH_PORT   :=
+SSH_KEY    :=
 GIT_REMOTE := origin
 GIT_BRANCH := main
 
