@@ -67,7 +67,7 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         title: 'GesTaller',
         description:
           'Aplicación web para la gestión integral de un lavadero de camiones y taller mecánico. Control de clientes, vehículos, órdenes de trabajo, facturación y seguimiento de servicios.',
-        techStack: ['PHP', 'Laravel', 'JavaScript', 'MySQL', 'Docker'],
+        techStack: ['FastAPI', 'Python', 'TypeScript', 'React', 'Tailwind', 'PostgreSQL', 'Docker'],
         liveUrl: 'https://demo-gestaller.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/gestaller-web',
         logo: '/gestaller-logo.svg',
@@ -77,7 +77,7 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         title: 'Silika',
         description:
           'Web corporativa de Silika Innovaciones del Vidrio S.L. (El Ejido, Almería), especializada en el manipulado y transformación de vidrio plano, cerramientos, trabajos en pladur y reformas integrales.',
-        techStack: ['Astro', 'JavaScript', 'HTML/CSS', 'Linux'],
+        techStack: ['Astro', 'JavaScript', 'HTML/CSS'],
         liveUrl: 'https://silika.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/silika',
         logo: '/silika-logo.svg',
@@ -87,11 +87,21 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         title: 'sakulazo.com',
         description:
           'Landing page personal con currículum integrado, secciones informativas y enlaces a proyectos. Desarrollada con un enfoque limpio y minimalista.',
-        techStack: ['PHP', 'JavaScript', 'HTML/CSS', 'Linux'],
+        techStack: ['Astro', 'Node', 'JavaScript', 'HTML/CSS'],
         liveUrl: 'https://sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/sakulazo.com',
         logo: '/sakulazo-logo.svg',
         wholeCard: false,
+      },
+      {
+        title: 'Refuerzo estudiantil',
+        description:
+          'Web de clases particulares de refuerzo escolar especializadas en matemáticas, física y química. Niveles ESO, Bachillerato y CFGS, con más de 10 años de experiencia e índice de aprobados superior al 95%.',
+        techStack: ['Astro', 'Tailwind', 'HTML/CSS'],
+        liveUrl: 'https://clases.sakulazo.com',
+        repoUrl: 'https://github.com/sakulazo/clases',
+        logo: '/clases-logo-horizontal.svg',
+        wholeCard: true,
       },
     ],
   },
