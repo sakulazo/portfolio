@@ -37,7 +37,7 @@ const roleParts = role.split(' & ');
         href="/261014_Lucas_Sanchez_Acosta_CV.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-navy dark:hover:bg-white dark:hover:text-black dark:border-2 dark:border-transparent dark:hover:border-blue-bright transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:bg-white dark:text-blue-bright dark:border-blue-bright dark:hover:bg-blue-bright dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -48,7 +48,7 @@ const roleParts = role.split(' & ');
       </a>
       <a
         href="#proyectos"
-        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-navy dark:hover:bg-white dark:hover:text-black dark:border-2 dark:border-transparent dark:hover:border-blue-bright transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:bg-white dark:text-blue-bright dark:border-blue-bright dark:hover:bg-blue-bright dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -60,7 +60,7 @@ const roleParts = role.split(' & ');
       </a>
       <a
         href="#contacto"
-        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold hover:bg-navy dark:hover:bg-white dark:hover:text-black dark:border-2 dark:border-transparent dark:hover:border-blue-bright transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:bg-white dark:text-blue-bright dark:border-blue-bright dark:hover:bg-blue-bright dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -143,15 +143,17 @@ const roleParts = role.split(' & ');
     </div>
 
     <div class="order-1 lg:order-2 flex justify-center">
-      <Image
-        src={foto}
-        alt="Lucas Sánchez, desarrollador web"
-        width={420}
-        height={600}
-        loading="eager"
-        fetchpriority="high"
-        class="w-64 sm:w-80 lg:w-full max-w-sm rounded-2xl mask-b-from-85% dark:mask-b-from-70%"
-      />
+      <div class="w-64 sm:w-80 lg:w-full max-w-sm drop-shadow-[0_20px_18px_rgba(30,58,95,0.8)] dark:drop-shadow-[0_0_18px_rgba(96,165,250,0.7)]">
+        <Image
+          src={foto}
+          alt="Lucas Sánchez, desarrollador web"
+          width={420}
+          height={600}
+          loading="eager"
+          fetchpriority="high"
+          class="w-full rounded-2xl mask-b-from-85% dark:mask-b-from-70%"
+        />
+      </div>
     </div>
   </div>
 </section>
