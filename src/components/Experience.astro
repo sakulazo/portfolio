@@ -2,6 +2,13 @@
 import { site } from '../data/site';
 
 const { title, jobs } = site.experience;
+
+// Divide el puesto en dos líneas tras la conjunción " y " para que el título
+// no parta dejando una palabra suelta en la última línea (p. ej. "…con IA").
+const splitPosition = (position: string): string[] => {
+  const match = position.match(/^(.*\sy)\s+(.+)$/);
+  return match ? [match[1], match[2]] : [position];
+};
 ---
 
 <section id="experiencia" class="py-20 min-h-dvh bg-gray-50 dark:bg-slate-800">
@@ -19,26 +26,39 @@ const { title, jobs } = site.experience;
             <div class="absolute left-4 md:left-1/2 w-4 h-4 bg-blue-bright rounded-full border-4 border-white dark:border-slate-800 shadow transform -translate-x-1/2 mt-6 z-10" />
 
             <div class={`ml-10 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-              <div class="bg-white dark:bg-slate-700 p-6 rounded-xl shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-600 hover:shadow-md transition-shadow">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                  <h3 class="text-xl font-semibold text-navy dark:text-slate-100">{job.position}</h3>
-                  <span class="text-sm text-gray-400 dark:text-slate-400 font-medium mt-1 md:mt-0">{job.period}</span>
+              <details class="group relative bg-white dark:bg-slate-700 rounded-xl shadow-sm dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-600 hover:border-blue-bright hover:shadow-xl dark:hover:shadow-slate-950/70 transition-all duration-300">
+                <summary class="block p-6 pb-12 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                  <div>
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-2">
+                      <h3 class="text-xl font-semibold text-navy dark:text-slate-100">
+                        {splitPosition(job.position).map((line, lineIndex) => (
+                          <Fragment>{lineIndex > 0 ? <><br />{' '}</> : null}{line}</Fragment>
+                        ))}
+                      </h3>
+                      <span class="text-sm text-gray-400 dark:text-slate-400 font-medium mt-1 lg:mt-0">{job.period}</span>
+                    </div>
+                    <p class="text-blue-bright font-medium">{job.company}</p>
+                  </div>
+                  <svg class="absolute bottom-4 left-1/2 -translate-x-1/2 w-5 h-5 text-gray-400 dark:text-slate-400 transition-transform duration-300 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </summary>
+                <div class="px-6 pb-12 cursor-pointer overflow-hidden">
+                  <p class="text-gray-600 dark:text-slate-300 mb-3 leading-relaxed">{job.description}</p>
+                  {job.achievements && job.achievements.length > 0 && (
+                    <ul class="space-y-2">
+                      {job.achievements.map((achievement) => (
+                        <li class="flex items-start gap-2 text-gray-600 dark:text-slate-300 text-sm">
+                          <svg class="w-5 h-5 text-blue-bright shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
-                <p class="text-blue-bright font-medium mb-3">{job.company}</p>
-                <p class="text-gray-600 dark:text-slate-300 mb-3 leading-relaxed">{job.description}</p>
-                {job.achievements && job.achievements.length > 0 && (
-                  <ul class="space-y-2">
-                    {job.achievements.map((achievement) => (
-                      <li class="flex items-start gap-2 text-gray-600 dark:text-slate-300 text-sm">
-                        <svg class="w-5 h-5 text-blue-bright shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
+              </details>
             </div>
           </div>
         ))}
@@ -46,3 +66,69 @@ const { title, jobs } = site.experience;
     </div>
   </div>
 </section>
+
+<script>
+  const DURATION = 260;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLDetailsElement>('#experiencia details').forEach((card) => {
+    const content = card.querySelector<HTMLElement>(':scope > div');
+    if (!content) return;
+
+    let isOpen = card.open;
+
+    const animate = (open: boolean) => {
+      const from = card.open ? content.getBoundingClientRect().height : 0;
+      content.getAnimations().forEach((animation) => animation.cancel());
+
+      if (open) {
+        card.open = true;
+        content.animate(
+          [{ height: `${from}px`, opacity: 0 }, { height: `${content.scrollHeight}px`, opacity: 1 }],
+          { duration: DURATION, easing: 'ease-out' },
+        );
+      } else {
+        const animation = content.animate(
+          [{ height: `${from}px`, opacity: 1 }, { height: '0px', opacity: 0 }],
+          { duration: DURATION, easing: 'ease-in', fill: 'forwards' },
+        );
+        animation.finished
+          .then(() => {
+            card.open = false;
+            animation.cancel();
+          })
+          .catch(() => {});
+      }
+    };
+
+    const toggle = () => {
+      isOpen = !isOpen;
+      if (reducedMotion) {
+        card.open = isOpen;
+        return;
+      }
+      animate(isOpen);
+    };
+
+    // Sincroniza el estado si el navegador abre/cierra la card por su cuenta
+    // (p. ej. al buscar texto en la página con Ctrl+F).
+    card.addEventListener('toggle', () => {
+      if (!content.getAnimations().length) isOpen = card.open;
+    });
+
+    // El summary lo gestiona el navegador: interceptamos para poder animar.
+    card.querySelector('summary')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      toggle();
+    });
+
+    // Y el resto de la card también colapsa/despliega.
+    card.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      if (target.closest('summary')) return;
+      // No cerrar la card si el clic cierra una selección de texto.
+      if (window.getSelection()?.toString()) return;
+      toggle();
+    });
+  });
+</script>

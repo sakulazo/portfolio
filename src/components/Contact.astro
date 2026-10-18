@@ -30,7 +30,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
             href={`https://wa.me/${whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex flex-col items-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
+            class="group flex flex-col items-center text-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
           >
             <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-bright transition-colors">
               <svg class="w-7 h-7 text-blue-bright group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -45,7 +45,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
         {phone && (
           <a
             href={`tel:${phone}`}
-            class="group flex flex-col items-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
+            class="group flex flex-col items-center text-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
           >
             <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-bright transition-colors">
               <svg class="w-7 h-7 text-blue-bright group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -62,7 +62,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
             href={linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex flex-col items-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
+            class="group flex flex-col items-center text-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
           >
             <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-bright transition-colors">
               <svg class="w-7 h-7 text-blue-bright group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex flex-col items-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
+            class="group flex flex-col items-center text-center p-6 md:p-8 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
           >
             <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-bright transition-colors">
               <svg class="w-7 h-7 text-blue-bright group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -93,7 +93,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
 
         <a
           href={`mailto:${email}`}
-          class="group flex flex-col items-center p-6 md:p-8 col-span-2 md:col-span-1 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
+          class="group flex flex-col items-center text-center p-6 md:p-8 col-span-2 md:col-span-1 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-blue-bright hover:shadow-lg dark:hover:shadow-slate-900/50 transition-all duration-300"
         >
           <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-bright transition-colors">
             <svg class="w-7 h-7 text-blue-bright group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -101,7 +101,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
             </svg>
           </div>
           <h3 class="text-lg font-semibold text-navy dark:text-slate-100 mb-1">Email</h3>
-          <p class="text-gray-500 dark:text-slate-400 text-sm">{email}</p>
+          <p class="text-gray-500 dark:text-slate-400 text-sm">Redactar correo</p>
         </a>
       </div>
 
@@ -147,8 +147,12 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
           </div>
           <button
             type="submit"
-            class="w-full cursor-pointer bg-blue-bright text-white py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:hover:bg-white dark:hover:text-blue-bright dark:hover:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+            class="w-full inline-flex items-center justify-center gap-2 cursor-pointer bg-blue-bright text-white py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:hover:bg-white dark:hover:text-blue-bright dark:hover:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
           >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 2L11 13" />
+              <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
             {formSubmit}
           </button>
           <div id="form-success" class="hidden text-center text-green-600 dark:text-green-400 font-medium py-4">

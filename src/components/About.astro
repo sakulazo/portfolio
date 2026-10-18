@@ -55,7 +55,7 @@ const categories = [...new Set(site.skills.map((s) => s.category))];
                 <path d="m6 9 6 6 6-6" />
               </svg>
             </summary>
-            <div class="px-5 pb-5 space-y-3 border-t border-gray-100 dark:border-slate-700">
+            <div class="px-5 pb-5 space-y-3 border-t border-gray-100 dark:border-slate-700 overflow-hidden">
               {site.skills
                 .filter((s) => s.category === category)
                 .map((skill) => (
@@ -77,19 +77,66 @@ const categories = [...new Set(site.skills.map((s) => s.category))];
   </div>
 </section>
 
-<style>
-  details[open] > div {
-    animation: about-reveal 0.25s ease;
-  }
+<script>
+  const DURATION = 260;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  @keyframes about-reveal {
-    from {
-      opacity: 0;
-      transform: translateY(-6px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
+  document.querySelectorAll<HTMLDetailsElement>('#sobre-mi details').forEach((card) => {
+    const content = card.querySelector<HTMLElement>(':scope > div');
+    if (!content) return;
+
+    const styles = getComputedStyle(content);
+    // scrollHeight incluye el padding pero no el borde; con box-sizing: border-box
+    // hay que sumarlo para que la animación acabe en la altura real.
+    const border =
+      parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth);
+    const targetHeight = () => content.scrollHeight + border;
+
+    let isOpen = card.open;
+
+    const animate = (open: boolean) => {
+      const from = card.open ? content.getBoundingClientRect().height : 0;
+      content.getAnimations().forEach((animation) => animation.cancel());
+
+      if (open) {
+        card.open = true;
+        content.animate(
+          [{ height: `${from}px`, opacity: 0 }, { height: `${targetHeight()}px`, opacity: 1 }],
+          { duration: DURATION, easing: 'ease-out' },
+        );
+      } else {
+        const animation = content.animate(
+          [{ height: `${from}px`, opacity: 1 }, { height: '0px', opacity: 0 }],
+          { duration: DURATION, easing: 'ease-in', fill: 'forwards' },
+        );
+        animation.finished
+          .then(() => {
+            card.open = false;
+            animation.cancel();
+          })
+          .catch(() => {});
+      }
+    };
+
+    const toggle = () => {
+      isOpen = !isOpen;
+      if (reducedMotion) {
+        card.open = isOpen;
+        return;
+      }
+      animate(isOpen);
+    };
+
+    // Sincroniza el estado si el navegador abre/cierra la card por su cuenta
+    // (p. ej. al buscar texto en la página con Ctrl+F).
+    card.addEventListener('toggle', () => {
+      if (!content.getAnimations().length) isOpen = card.open;
+    });
+
+    // El summary lo gestiona el navegador: interceptamos para poder animar.
+    card.querySelector('summary')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      toggle();
+    });
+  });
+</script>
