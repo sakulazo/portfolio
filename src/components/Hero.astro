@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { site } from '../data/site';
 import foto from '../assets/yo_bien_cortado.png';
 
-const { available, role, description, ctaText, contactText, techLabel } = site.hero;
+const { available, role, description, ctaText, contactText, cvUrl, techLabel } = site.hero;
 const roleParts = role.split(' & ');
 ---
 
@@ -47,15 +47,15 @@ const roleParts = role.split(' & ');
     <div class="order-3 lg:col-span-2">
     <div class="flex flex-col md:flex-row items-center justify-center gap-4">
       <a
-        href="/261014_Lucas_Sanchez_Acosta_CV.pdf"
+        href={cvUrl}
         target="_blank"
         rel="noopener noreferrer"
+        data-cv-open
         class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:bg-white dark:text-blue-bright dark:border-blue-bright dark:hover:bg-blue-bright dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <path d="M7 10l5 5 5-5" />
-          <path d="M12 15V3" />
+          <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+          <circle cx="12" cy="12" r="3" />
         </svg>
         Currículum Vitae
       </a>

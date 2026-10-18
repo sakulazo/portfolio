@@ -19,6 +19,7 @@ export const site = {
       'Técnico Superior en Desarrollo Web. Combino infraestructura Linux, automatización con IA generativa y buenas prácticas de desarrollo para construir soluciones web eficientes y bien documentadas.',
     ctaText: 'Proyectos',
     contactText: 'Contáctame',
+    cvUrl: '/261014_Lucas_Sanchez_Acosta_CV.pdf',
     techLabel: 'Stack Tecnológico',
     technologies: ['Python', 'Laravel', 'JavaScript', 'Node.js', 'Tailwind', 'React'],
   },
