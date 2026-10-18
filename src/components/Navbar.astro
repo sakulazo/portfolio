@@ -13,8 +13,9 @@ const navIcons: Record<string, string> = {
 
 <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800">
   <div class="w-[90%] mx-auto px-3 h-16 flex items-center justify-between">
-    <a href="#inicio" class="text-xl font-bold text-navy dark:text-slate-100">
-      {"{Lucas: Sánchez/}"}
+    <a href="#inicio" class="flex items-center" aria-label="Lucas Sánchez — inicio">
+      <img src="/logo-portfolio-horizonta-oscuro.svg" alt="Lucas Sánchez" class="h-9 w-auto dark:hidden" />
+      <img src="/logo-portfolio-horizonta-claro.svg" alt="Lucas Sánchez" class="h-9 w-auto hidden dark:block" />
     </a>
     <ul class="hidden md:flex items-center gap-8">
       {links.map((link) => (

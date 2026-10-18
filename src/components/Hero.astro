@@ -14,8 +14,21 @@ const roleParts = role.split(' & ');
       <span class="w-2 h-2 bg-blue-bright dark:bg-blue-400 rounded-full animate-pulse" />
       {available}
     </div>
-    <h1 class="text-5xl md:text-7xl font-bold text-navy dark:text-slate-100 mb-4 leading-tight">
-      Lucas Sánchez
+    <h1 class="mb-4">
+      <img
+        src="/logo-portfolio-horizonta-oscuro.svg"
+        alt="Lucas Sánchez"
+        class="mx-auto w-full max-w-md dark:hidden"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <img
+        src="/logo-portfolio-horizonta-claro.svg"
+        alt="Lucas Sánchez"
+        class="mx-auto w-full max-w-md hidden dark:block"
+        loading="eager"
+        fetchpriority="high"
+      />
     </h1>
     <p class="text-2xl md:text-3xl text-blue-bright font-semibold mb-6 text-center">
       {roleParts.length === 2 ? (
