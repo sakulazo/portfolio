@@ -11,7 +11,7 @@ const navIcons: Record<string, string> = {
 };
 ---
 
-<nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800">
+<nav aria-label="Navegación principal" class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800">
   <div class="w-[90%] mx-auto px-3 h-16 flex items-center justify-between">
     <a href="#inicio" class="flex items-center" aria-label="Lucas Sánchez — inicio">
       <img src="/logo-portfolio-horizonta-oscuro.svg" alt="Lucas Sánchez" class="h-9 w-auto dark:hidden" />
@@ -54,6 +54,8 @@ const navIcons: Record<string, string> = {
       id="menu-toggle"
       class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
       aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
     >
       <span id="bar-1" class="block w-6 h-0.5 bg-navy dark:bg-slate-100 transition-all duration-300" />
       <span id="bar-2" class="block w-6 h-0.5 bg-navy dark:bg-slate-100 transition-all duration-300" />
@@ -62,7 +64,8 @@ const navIcons: Record<string, string> = {
   </div>
   <div
     id="mobile-menu"
-    class="md:hidden absolute top-full left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-gray-100 dark:border-slate-800 shadow-md -translate-y-full opacity-0 pointer-events-none transition-all duration-500 ease-in-out"
+    aria-hidden="true"
+    class="md:hidden invisible absolute top-full left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-gray-100 dark:border-slate-800 shadow-md -translate-y-full opacity-0 pointer-events-none transition-all duration-500 ease-in-out"
   >
     <ul class="flex flex-col items-center gap-4 py-6">
       {links.map((link) => (
@@ -111,19 +114,23 @@ const navIcons: Record<string, string> = {
   function set(openState){
     open = openState;
     if(open){
-      menu.classList.remove('-translate-y-full','opacity-0','pointer-events-none');
-      menu.classList.add('translate-y-0','opacity-100','pointer-events-auto');
+      menu.classList.remove('-translate-y-full','opacity-0','pointer-events-none','invisible');
+      menu.classList.add('translate-y-0','opacity-100','pointer-events-auto','visible');
+      menu.setAttribute('aria-hidden','false');
       bar1.classList.add('rotate-45','translate-y-2');
       bar2.classList.add('opacity-0');
       bar3.classList.add('-rotate-45','-translate-y-2');
       toggle.setAttribute('aria-label','Cerrar menú');
+      toggle.setAttribute('aria-expanded','true');
     } else {
-      menu.classList.add('-translate-y-full','opacity-0','pointer-events-none');
-      menu.classList.remove('translate-y-0','opacity-100','pointer-events-auto');
+      menu.classList.add('-translate-y-full','opacity-0','pointer-events-none','invisible');
+      menu.classList.remove('translate-y-0','opacity-100','pointer-events-auto','visible');
+      menu.setAttribute('aria-hidden','true');
       bar1.classList.remove('rotate-45','translate-y-2');
       bar2.classList.remove('opacity-0');
       bar3.classList.remove('-rotate-45','-translate-y-2');
       toggle.setAttribute('aria-label','Abrir menú');
+      toggle.setAttribute('aria-expanded','false');
     }
   }
   toggle.addEventListener('click', (e)=>{
@@ -140,6 +147,38 @@ const navIcons: Record<string, string> = {
     if(e.key==='Escape') set(false);
   });
   links.forEach(l=>l.addEventListener('click', ()=>set(false)));
+</script>
+
+<script>
+  // Scrollspy ligero: marca aria-current="page" en el enlace de la sección visible
+  const sectionLinks = [...document.querySelectorAll('a[href^="#"]')].filter(
+    (a) => a.closest('nav') && /^#(sobre-mi|proyectos|experiencia|contacto|inicio)$/.test(a.getAttribute('href') ?? '')
+  );
+  const sections = sectionLinks
+    .map((a) => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    const byId = new Map();
+    sectionLinks.forEach((a) => {
+      const id = a.getAttribute('href')!.slice(1);
+      if (!byId.has(id)) byId.set(id, []);
+      byId.get(id)!.push(a);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            sectionLinks.forEach((a) => a.removeAttribute('aria-current'));
+            byId.get(entry.target.id)?.forEach((a) => a.setAttribute('aria-current', 'page'));
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
 </script>
 
 <script>

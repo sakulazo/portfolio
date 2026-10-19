@@ -20,7 +20,7 @@ SSH_ALIAS  ?= vps
 GIT_REMOTE := origin
 GIT_BRANCH := main
 
-.PHONY: help build push deploy verify
+.PHONY: help build push deploy verify purge
 
 help: ## Muestra la ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
@@ -46,3 +46,15 @@ deploy: build push ## Build + push + subida al VPS (limpia el destino completo)
 
 verify: ## Comprueba que el sitio responde 200
 	@ssh $(SSH_ALIAS) 'curl -s -o /dev/null -w "$(SITE_NAME): HTTP %{http_code}\n" $(SITE_URL)'
+
+purge: ## Purga toda la caché de Cloudflare (purge_everything). Requiere CLOUDFLARE_API_TOKEN y CLOUDFLARE_ZONE_ID (env vars, nunca en repo)
+	@test -n "$$CLOUDFLARE_API_TOKEN" || { echo "ERROR: falta CLOUDFLARE_API_TOKEN (export CLOUDFLARE_API_TOKEN=...)"; exit 1; }
+	@test -n "$$CLOUDFLARE_ZONE_ID" || { echo "ERROR: falta CLOUDFLARE_ZONE_ID (export CLOUDFLARE_ZONE_ID=...)"; exit 1; }
+	@echo ">> Purgando caché de Cloudflare (purge_everything) en zona $$CLOUDFLARE_ZONE_ID..."
+	@curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$$CLOUDFLARE_ZONE_ID/purge_cache" \
+	  -H "Authorization: Bearer $$CLOUDFLARE_API_TOKEN" \
+	  -H "Content-Type: application/json" \
+	  --data '{"purge_everything":true}' \
+	  | grep -q '"success":true' \
+	  && echo "Cloudflare: caché purgada correctamente" \
+	  || { echo "Cloudflare: fallo al purgar"; exit 1; }

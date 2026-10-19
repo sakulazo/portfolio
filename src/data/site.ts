@@ -19,7 +19,7 @@ export const site = {
       'Técnico Superior en Desarrollo Web. Combino infraestructura Linux, automatización con IA generativa y buenas prácticas de desarrollo para construir soluciones web eficientes y bien documentadas.',
     ctaText: 'Proyectos',
     contactText: 'Contáctame',
-    cvUrl: '/261014_Lucas_Sanchez_Acosta_CV.pdf',
+    cvUrl: '/Lucas_Sanchez_Acosta_CV.pdf',
     techLabel: 'Stack Tecnológico',
     technologies: ['Python', 'Laravel', 'JavaScript', 'Node.js', 'Tailwind', 'React'],
   },
@@ -72,7 +72,6 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         liveUrl: 'https://demo-gestaller.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/gestaller-web',
         logo: '/gestaller-logo.svg',
-        wholeCard: false,
       },
       {
         title: 'Silika',
@@ -82,7 +81,6 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         liveUrl: 'https://silika.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/silika',
         logo: '/silika-logo.svg',
-        wholeCard: true,
       },
       {
         title: 'sakulazo.com',
@@ -92,7 +90,6 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         liveUrl: 'https://sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/sakulazo.com',
         logo: '/sakulazo-logo.svg',
-        wholeCard: false,
       },
       {
         title: 'Refuerzo estudiantil',
@@ -102,7 +99,6 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
         liveUrl: 'https://clases.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/clases',
         logo: '/clases-logo-horizontal.svg',
-        wholeCard: true,
       },
     ],
   },

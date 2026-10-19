@@ -33,6 +33,12 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="Lucas Sánchez" />
 
+    <link rel="canonical" href="https://portfolio.sakulazo.com/" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="robots" content="index, follow" />
+
     <script>
       (function () {
         var theme = localStorage.getItem('theme');
@@ -47,6 +53,11 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content="https://portfolio.sakulazo.com/" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Lucas Sánchez — Portfolio" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -55,7 +66,8 @@ const {
     <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <script src="https://web3forms.com/client/script.js" async defer></script>
+    <link rel="preconnect" href="https://js.hcaptcha.com" crossorigin />
+    <link rel="preconnect" href="https://api.web3forms.com" crossorigin />
 
     <!-- Structured Data - Person Schema -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -64,6 +76,7 @@ const {
       "name": "Lucas Sánchez",
       "jobTitle": "Desarrollador Web · SDD & Automatización con IA",
       "url": "https://portfolio.sakulazo.com",
+      "image": "https://portfolio.sakulazo.com/og-image.png",
       "sameAs": [
         "https://github.com/sakulazo",
         "https://www.linkedin.com/in/lucas-s%C3%A1nchez-dev"
@@ -77,13 +90,20 @@ const {
         "Linux",
         "SDD",
         "Automatización con IA"
-      ]
+      ],
+      "knowsLanguage": ["es", "en"],
+      "alumniOf": "DAW"
     })}>
     </script>
 
     <title>{title}</title>
   </head>
   <body class="bg-white dark:bg-slate-900 text-gray-900 dark:text-slate-100 antialiased">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-blue-strong focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold"
+      >Saltar al contenido</a
+    >
     <slot />
   </body>
 
@@ -126,6 +146,38 @@ const {
 
       window.addEventListener('resize', revealVisible, { passive: true });
       revealVisible();
+    }
+  </script>
+
+  <script>
+    // Cargar script de Web3Forms + hCaptcha cuando el formulario esté a punto de verse
+    let formLoaded = false;
+    function loadFormScripts() {
+      if (formLoaded) return;
+      formLoaded = true;
+      const s = document.createElement('script');
+      s.src = 'https://web3forms.com/client/script.js';
+      s.async = true;
+      s.defer = true;
+      document.body.appendChild(s);
+    }
+
+    const formSection = document.getElementById('contacto');
+    if (formSection) {
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              loadFormScripts();
+              obs.disconnect();
+            }
+          },
+          { rootMargin: '150% 0px' }
+        );
+        obs.observe(formSection);
+      } else {
+        window.addEventListener('scroll', loadFormScripts, { passive: true, once: true });
+      }
     }
   </script>
 </html>

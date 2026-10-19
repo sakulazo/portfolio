@@ -126,6 +126,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
               placeholder={formName}
               class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 focus:border-blue-bright focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 outline-none transition-all"
               required
+              aria-required="true"
             />
             <input
               type="email"
@@ -133,6 +134,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
               placeholder={formEmail}
               class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 focus:border-blue-bright focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 outline-none transition-all"
               required
+              aria-required="true"
             />
           </div>
           <textarea
@@ -141,13 +143,14 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
             placeholder={formMessage}
             class="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-400 focus:border-blue-bright focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900 outline-none transition-all resize-none"
             required
+            aria-required="true"
           ></textarea>
           <div class="flex justify-center">
             <div class="h-captcha" data-captcha="true"></div>
           </div>
           <button
             type="submit"
-            class="w-full inline-flex items-center justify-center gap-2 cursor-pointer bg-blue-bright text-white py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:hover:bg-white dark:hover:text-blue-bright dark:hover:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+            class="w-full inline-flex items-center justify-center gap-2 cursor-pointer bg-blue-strong text-white py-3.5 rounded-lg font-semibold border-2 border-blue-strong hover:bg-navy dark:hover:bg-white dark:hover:text-blue-strong dark:hover:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M22 2L11 13" />
@@ -158,6 +161,9 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
           <div id="form-success" class="hidden text-center text-green-600 dark:text-green-400 font-medium py-4">
             {formSuccess}
           </div>
+          <p class="text-xs text-center text-gray-500 dark:text-slate-400 max-w-lg mx-auto">
+            Tus datos se usan solo para responderte y se procesan con Web3Forms y hCaptcha.
+          </p>
         </form>
         <script>
           const form = document.getElementById('contact-form') as HTMLFormElement;
@@ -167,11 +173,17 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
 
           form?.addEventListener('submit', (e) => {
             e.preventDefault();
+            const submitBtn = form.querySelector('button[type="submit"]');
             const data = new FormData(form);
             const response = data.get('h-captcha-response');
             if (!response) {
               alert(captchaAlert);
               return;
+            }
+            if (submitBtn) {
+              submitBtn.disabled = true;
+              const original = submitBtn.textContent;
+              submitBtn.textContent = 'Enviando...';
             }
             fetch('https://api.web3forms.com/submit', {
               method: 'POST',
@@ -184,6 +196,21 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
                   const title = document.getElementById('form-title');
                   if (title) title.textContent = successTitleText;
                   successMsg?.classList.remove('hidden');
+                } else {
+                  alert(json.message || 'Ha ocurrido un error al enviar el mensaje.');
+                  const submitBtn = form.querySelector('button[type="submit"]');
+                  if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Enviar mensaje';
+                  }
+                }
+              })
+              .catch((err) => {
+                alert('Error de red al enviar el mensaje. Inténtalo de nuevo.');
+                const submitBtn = form.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.textContent = 'Enviar mensaje';
                 }
               });
           });

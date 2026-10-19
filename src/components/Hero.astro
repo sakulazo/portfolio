@@ -8,13 +8,14 @@ const roleParts = role.split(' & ');
 ---
 
 <section id="inicio" class="min-h-dvh flex items-center justify-center bg-white dark:bg-linear-to-br dark:from-slate-950 dark:to-slate-700 pt-20 pb-20 sm:pt-16 sm:pb-16 lg:pb-8 xl:pb-0">
-  <div class="js-reveal max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-x-12 items-center">
+  <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-x-12 items-center">
     <div class="order-2 lg:order-1 text-center">
-    <div class="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-bright dark:text-blue-400 px-4 py-2 rounded-full text-sm font-medium mb-8">
+    <div class="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 text-blue-strong dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-8">
       <span class="w-2 h-2 bg-blue-bright dark:bg-blue-400 rounded-full animate-pulse" />
       {available}
     </div>
     <h1 class="mb-4">
+      <span class="sr-only">Lucas Sánchez — Desarrollador Web · SDD &amp; Automatización con IA</span>
       <img
         src="/logo-portfolio-horizonta-oscuro.svg"
         alt="Lucas Sánchez"
@@ -30,7 +31,7 @@ const roleParts = role.split(' & ');
         fetchpriority="high"
       />
     </h1>
-    <p class="text-2xl md:text-3xl text-blue-bright font-semibold mb-6 text-center">
+    <p class="text-2xl md:text-3xl text-blue-bright dark:text-blue-400 font-semibold mb-6 text-center">
       {roleParts.length === 2 ? (
         <>
           {roleParts[0]} &<br class="md:hidden" /> {roleParts[1]}
@@ -51,7 +52,7 @@ const roleParts = role.split(' & ');
         target="_blank"
         rel="noopener noreferrer"
         data-cv-open
-        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:bg-white dark:text-blue-bright dark:border-blue-bright dark:hover:bg-blue-bright dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-strong text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-strong hover:bg-navy dark:bg-white dark:text-blue-strong dark:border-blue-strong dark:hover:bg-blue-strong dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
@@ -61,7 +62,7 @@ const roleParts = role.split(' & ');
       </a>
       <a
         href="#proyectos"
-        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:bg-white dark:text-blue-bright dark:border-blue-bright dark:hover:bg-blue-bright dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-strong text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-strong hover:bg-navy dark:bg-white dark:text-blue-strong dark:border-blue-strong dark:hover:bg-blue-strong dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="3" y="3" width="7" height="7" rx="1" />
@@ -73,7 +74,7 @@ const roleParts = role.split(' & ');
       </a>
       <a
         href="#contacto"
-        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-bright text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-bright hover:bg-navy dark:bg-white dark:text-blue-bright dark:border-blue-bright dark:hover:bg-blue-bright dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
+        class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-strong text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-strong hover:bg-navy dark:bg-white dark:text-blue-strong dark:border-blue-strong dark:hover:bg-blue-strong dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -82,7 +83,7 @@ const roleParts = role.split(' & ');
         {contactText}
       </a>
     </div>
-    <div class="mt-16 flex flex-col items-center justify-center gap-4 text-gray-400 dark:text-slate-500">
+    <div class="mt-16 flex flex-col items-center justify-center gap-4 text-gray-500 dark:text-slate-300">
       <span class="text-sm font-medium uppercase tracking-wider whitespace-nowrap">{techLabel}</span>
       <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
         <span title="Python" class="inline-flex">
