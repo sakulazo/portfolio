@@ -58,14 +58,26 @@ deploy: build push ## Build + push + subida al VPS (limpia el destino completo)
 verify: ## Comprueba que el sitio responde 200
 	@ssh $(SSH_ALIAS) 'curl -s -o /dev/null -w "$(SITE_NAME): HTTP %{http_code}\n" $(SITE_URL)'
 
-purge: ## Purga toda la caché de Cloudflare (purge_everything). Requiere CLOUDFLARE_API_TOKEN y CLOUDFLARE_ZONE_ID (env vars, nunca en repo)
-	@test -n "$$CLOUDFLARE_API_TOKEN" || { echo "ERROR: falta CLOUDFLARE_API_TOKEN (export CLOUDFLARE_API_TOKEN=...)"; exit 1; }
-	@test -n "$$CLOUDFLARE_ZONE_ID" || { echo "ERROR: falta CLOUDFLARE_ZONE_ID (export CLOUDFLARE_ZONE_ID=...)"; exit 1; }
-	@echo ">> Purgando caché de Cloudflare (purge_everything) en zona $$CLOUDFLARE_ZONE_ID..."
-	@curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$$CLOUDFLARE_ZONE_ID/purge_cache" \
+# ── Cloudflare ────────────────────────────────────────────────────────
+# La credencial es de cuenta (permiso minimo: Zone > Cache Purge > Edit sobre la
+# zona sakulazo.com), NO del VPS, por eso NO se materializa en el servidor
+# (ADR-0014 de infra-vps): custodia cifrada en sakulazo/infra-secrets y el purge
+# la descifra bajo demanda con sops. En wsl-local hace falta sops y la clave age
+# (SOPS_AGE_KEY_FILE, exportada en ~/.bashrc). Nunca un .env en claro, nunca un
+# export manual.
+CLOUDFLARE_ENV ?= $(HOME)/infra-secrets/secrets/cloudflare.enc.env
+
+purge: ## Purga la cache de Cloudflare (purge_everything, credencial via sops bajo demanda)
+	@command -v sops >/dev/null || { echo "ERROR: sops no esta instalado (wsl-local)"; exit 1; }
+	@test -r "$(CLOUDFLARE_ENV)" || { echo "ERROR: no existe $(CLOUDFLARE_ENV) (ver ADR-0014)"; exit 1; }
+	@eval "$$(sops -d '$(CLOUDFLARE_ENV)')"; \
+	test -n "$$CLOUDFLARE_API_TOKEN" && test -n "$$CLOUDFLARE_ZONE_ID" || \
+	  { echo "ERROR: el secreto descifrado no define CLOUDFLARE_API_TOKEN/CLOUDFLARE_ZONE_ID"; exit 1; }; \
+	echo ">> Purgando cache de Cloudflare (purge_everything) en zona $$CLOUDFLARE_ZONE_ID..."; \
+	curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$$CLOUDFLARE_ZONE_ID/purge_cache" \
 	  -H "Authorization: Bearer $$CLOUDFLARE_API_TOKEN" \
 	  -H "Content-Type: application/json" \
 	  --data '{"purge_everything":true}' \
 	  | grep -q '"success":true' \
-	  && echo "Cloudflare: caché purgada correctamente" \
+	  && echo "Cloudflare: cache purgada correctamente" \
 	  || { echo "Cloudflare: fallo al purgar"; exit 1; }

@@ -50,11 +50,13 @@ permiso de push el control del VPS.
 ### Cloudflare
 
 `make purge` invalida la caché del borde con `purge_everything` tras un despliegue.
-Requiere dos variables de entorno, que **nunca** van al repositorio:
+La credencial (permiso mínimo: Zone > Cache Purge > Edit sobre la zona
+`sakulazo.com`) es de cuenta, no del VPS: vive cifrada en `sakulazo/infra-secrets`
+y `make purge` la descifra bajo demanda con `sops` (ADR-0014 de infra-vps).
+No hay exports manuales ni `.env` en claro. Requiere `sops` y la clave age
+(`SOPS_AGE_KEY_FILE`, exportada en `~/.bashrc`) en wsl-local:
 
 ```bash
-export CLOUDFLARE_API_TOKEN=...   # permiso minimo: Zone > Cache Purge > Edit
-export CLOUDFLARE_ZONE_ID=...    # Zone ID del dominio en el panel de Cloudflare
 make purge
 ```
 
@@ -72,8 +74,8 @@ make deploy MSG="fix: mobile scroll"
 2. **Git** - `add` + `commit` + `push` a `origin/main` (lista los archivos a
    commitear y bloquea `.env`/`acckey.txt`/`salida.txt`)
 3. **Deploy** - Sube `dist/` a `/srv/portfolio/dist` en el VPS vía SSH y Caddy lo sirve
-4. **Purge** - Purga la caché de Cloudflare (requiere `CLOUDFLARE_API_TOKEN` y
-   `CLOUDFLARE_ZONE_ID` en el entorno)
+4. **Purge** - Purga la caché de Cloudflare (credencial cifrada en
+   `infra-secrets`, descifrada con `sops` bajo demanda)
 5. **Verify** - `curl` al sitio: con la caché purgada, el 200 refleja el build recién subido
 
 ### Modelo (GitOps de escritura única)
