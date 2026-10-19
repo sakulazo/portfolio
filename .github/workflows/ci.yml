@@ -45,6 +45,11 @@ jobs:
       - name: Instalar dependencias
         run: pnpm install --frozen-lockfile
 
+      # Typecheck de componentes y scripts antes de construir: sin este paso,
+      # un error de tipos pasa el CI mientras `astro build` no truene.
+      - name: Comprobacion de tipos
+        run: pnpm check
+
       # `make build`, no `pnpm build`: el Makefile es la fuente de verdad del comando de
       # construccion. Si cambias BUILD_CMD, el CI lo hereda y no puede divergir de local.
       - name: Construir

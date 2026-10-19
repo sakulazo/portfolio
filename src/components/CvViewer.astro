@@ -119,31 +119,32 @@ const pdfUrl = site.hero.cvUrl;
 
   if (modal) {
     const pdfUrl = modal.dataset.pdfUrl ?? '';
-    const stage = modal.querySelector('[data-cv-stage]');
-    const canvas = modal.querySelector('[data-cv-canvas]');
-    const statusEl = modal.querySelector('[data-cv-status]');
-    const pageEl = modal.querySelector('[data-cv-page]');
-    const pagesEl = modal.querySelector('[data-cv-pages]');
-    const zoomEl = modal.querySelector('[data-cv-zoom]');
-    const prevBtn = modal.querySelector('[data-cv-prev]');
-    const nextBtn = modal.querySelector('[data-cv-next]');
-    const zoomInBtn = modal.querySelector('[data-cv-zoom-in]');
-    const zoomOutBtn = modal.querySelector('[data-cv-zoom-out]');
-    const closeBtn = modal.querySelector('button[data-cv-close]');
+    const stage = modal.querySelector<HTMLElement>('[data-cv-stage]')!;
+    const canvas = modal.querySelector<HTMLCanvasElement>('[data-cv-canvas]')!;
+    const statusEl = modal.querySelector<HTMLElement>('[data-cv-status]')!;
+    const pageEl = modal.querySelector<HTMLElement>('[data-cv-page]')!;
+    const pagesEl = modal.querySelector<HTMLElement>('[data-cv-pages]')!;
+    const zoomEl = modal.querySelector<HTMLElement>('[data-cv-zoom]')!;
+    const prevBtn = modal.querySelector<HTMLButtonElement>('[data-cv-prev]')!;
+    const nextBtn = modal.querySelector<HTMLButtonElement>('[data-cv-next]')!;
+    const zoomInBtn = modal.querySelector<HTMLButtonElement>('[data-cv-zoom-in]')!;
+    const zoomOutBtn = modal.querySelector<HTMLButtonElement>('[data-cv-zoom-out]')!;
+    const closeBtn = modal.querySelector<HTMLButtonElement>('button[data-cv-close]')!;
     const triggers = document.querySelectorAll('[data-cv-open]');
 
     const ZOOM_STEPS = [0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3];
 
-    let pdfjsLib = null;
-    let doc = null;
+    // pdfjs-dist no exporta tipos para su subpath .min.mjs (ver src/env.d.ts)
+    let pdfjsLib: any = null;
+    let doc: any = null;
     let pageNum = 1;
     let zoomIndex = ZOOM_STEPS.indexOf(1);
-    let renderTask = null;
+    let renderTask: any = null;
     let renderToken = 0;
-    let lastFocused = null;
+    let lastFocused: HTMLElement | null = null;
     let isLoading = false;
 
-    const setStatus = (message) => {
+    const setStatus = (message: string) => {
       statusEl.textContent = message;
       statusEl.classList.toggle('hidden', !message);
     };
@@ -170,7 +171,7 @@ const pdfUrl = site.hero.cvUrl;
       return lib;
     };
 
-    const render = async (token) => {
+    const render = async (token: number) => {
       if (!doc || !canvas || !stage) return;
 
       if (renderTask) {
@@ -201,11 +202,11 @@ const pdfUrl = site.hero.cvUrl;
       if (token === renderToken) setStatus('');
     };
 
-    const refresh = async (token) => {
+    const refresh = async (token: number) => {
       try {
         await render(token);
       } catch (error) {
-        if (error?.name === 'RenderingCancelledException') return;
+        if (error instanceof Error && error.name === 'RenderingCancelledException') return;
         setStatus('No se pudo mostrar el documento. Abre el PDF en una pestaña nueva.');
       }
     };
@@ -237,7 +238,7 @@ const pdfUrl = site.hero.cvUrl;
     };
 
     const open = () => {
-      lastFocused = document.activeElement;
+      lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       modal.classList.remove('invisible', 'opacity-0');
       modal.classList.add('visible', 'opacity-100');
       document.body.style.overflow = 'hidden';
@@ -257,7 +258,7 @@ const pdfUrl = site.hero.cvUrl;
       if (lastFocused instanceof HTMLElement) lastFocused.focus();
     };
 
-    const goToPage = (target) => {
+    const goToPage = (target: number) => {
       if (!doc) return;
       const next = Math.min(Math.max(target, 1), doc.numPages);
       if (next === pageNum) return;
@@ -266,7 +267,7 @@ const pdfUrl = site.hero.cvUrl;
       renderCurrent();
     };
 
-    const setZoom = (index) => {
+    const setZoom = (index: number) => {
       const next = Math.min(Math.max(index, 0), ZOOM_STEPS.length - 1);
       if (next === zoomIndex) return;
       zoomIndex = next;
@@ -306,7 +307,7 @@ const pdfUrl = site.hero.cvUrl;
       if (event.key === '-') setZoom(zoomIndex - 1);
 
       if (event.key === 'Tab') {
-        const focusables = modal.querySelectorAll('button:not([disabled]), a[href]');
+        const focusables = modal.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]');
         if (!focusables.length) return;
         const first = focusables[0];
         const last = focusables[focusables.length - 1];
@@ -320,7 +321,7 @@ const pdfUrl = site.hero.cvUrl;
       }
     });
 
-    let resizeTimeout;
+    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
     new ResizeObserver(() => {
       if (modal.classList.contains('invisible') || !doc) return;
       clearTimeout(resizeTimeout);

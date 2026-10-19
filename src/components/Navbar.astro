@@ -104,14 +104,14 @@ const navIcons: Record<string, string> = {
 </nav>
 
 <script>
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const bar1 = document.getElementById('bar-1');
-  const bar2 = document.getElementById('bar-2');
-  const bar3 = document.getElementById('bar-3');
+  const toggle = document.getElementById('menu-toggle') as HTMLButtonElement;
+  const menu = document.getElementById('mobile-menu') as HTMLElement;
+  const bar1 = document.getElementById('bar-1') as HTMLElement;
+  const bar2 = document.getElementById('bar-2') as HTMLElement;
+  const bar3 = document.getElementById('bar-3') as HTMLElement;
   const links = document.querySelectorAll('.mobile-nav-link');
   let open = false;
-  function set(openState){
+  function set(openState: boolean){
     open = openState;
     if(open){
       menu.classList.remove('-translate-y-full','opacity-0','pointer-events-none','invisible');
@@ -139,8 +139,8 @@ const navIcons: Record<string, string> = {
   });
   document.addEventListener('click', (e)=>{
     if(!open) return;
-    if(menu.contains(e.target)) return;
-    if(toggle.contains(e.target)) return;
+    if(menu.contains(e.target as Node)) return;
+    if(toggle.contains(e.target as Node)) return;
     set(false);
   });
   document.addEventListener('keydown', (e)=>{
@@ -155,11 +155,11 @@ const navIcons: Record<string, string> = {
     (a) => a.closest('nav') && /^#(sobre-mi|proyectos|experiencia|contacto|inicio)$/.test(a.getAttribute('href') ?? '')
   );
   const sections = sectionLinks
-    .map((a) => document.querySelector(a.getAttribute('href')))
-    .filter(Boolean);
+    .map((a) => document.querySelector(a.getAttribute('href') ?? ''))
+    .filter((s): s is Element => s !== null);
 
   if (sections.length && 'IntersectionObserver' in window) {
-    const byId = new Map();
+    const byId = new Map<string, Element[]>();
     sectionLinks.forEach((a) => {
       const id = a.getAttribute('href')!.slice(1);
       if (!byId.has(id)) byId.set(id, []);
@@ -182,9 +182,9 @@ const navIcons: Record<string, string> = {
 </script>
 
 <script>
-  const themeToggles = document.querySelectorAll('.theme-switch-input');
+  const themeToggles = document.querySelectorAll<HTMLInputElement>('.theme-switch-input');
 
-  function applyTheme(dark) {
+  function applyTheme(dark: boolean) {
     document.documentElement.classList.toggle('dark', dark);
     localStorage.setItem('theme', dark ? 'dark' : 'light');
     themeToggles.forEach((input) => {

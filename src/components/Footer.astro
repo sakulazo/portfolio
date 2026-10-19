@@ -58,7 +58,7 @@ const { copyright, legalTitle, legalText } = site.footer;
 </footer>
 
 <script>
-  const toggle = document.getElementById('legal-toggle');
+  const toggle = document.getElementById('legal-toggle') as HTMLInputElement | null;
   const chevron = document.getElementById('legal-chevron');
   const legalText = document.getElementById('legal-text');
 

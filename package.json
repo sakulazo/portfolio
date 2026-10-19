@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -18,10 +19,11 @@
     "sharp": "^0.35.5"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@tailwindcss/vite": "^4.3.2",
     "lucide-static": "^1.57.0",
-    "pdf-lib": "^1.17.1",
-    "tailwindcss": "^4.3.2"
+    "tailwindcss": "^4.3.2",
+    "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@11.13.1+sha512.b2fc7683b8a6525414e7d13e1ba28caaddde96bf66ec540bfaeb7e702b81f3e0be4d1f295edf7f9fe0396740a8dce4509c582ddf79891f4543fea32d37645f25"
+  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
 }

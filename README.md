@@ -22,6 +22,7 @@ Sitio web personal de portfolio desarrollado con Astro y Tailwind CSS.
 | :---------------------- | :------------------------------------------- |
 | `pnpm install`          | Instala dependencias                         |
 | `pnpm dev`              | Inicia servidor local en `localhost:4321`    |
+| `pnpm check`            | Comprobacion de tipos (`astro check`)        |
 | `pnpm build`            | Genera el sitio estatico en `./dist/`        |
 | `pnpm preview`          | Previsualiza el build localmente             |
 | `make deploy MSG="..."` | Build + push + despliegue al VPS             |
@@ -35,9 +36,11 @@ artefactos críticos existen:
 
 1. `pnpm install --frozen-lockfile` — dependencias reproducibles (falla si el
    `package.json` y el lockfile no cuadran).
-2. `make build` — construye desde el Makefile, que es la fuente de verdad del
+2. `pnpm check` — comprobación de tipos (`astro check`) sobre componentes y
+   scripts; falla si hay errores de tipos aunque el build no truene.
+3. `make build` — construye desde el Makefile, que es la fuente de verdad del
    comando de construcción. Si cambia `BUILD_CMD`, el CI lo hereda.
-3. Verificación de `dist/`: `index.html`, `robots.txt`, `sitemap-index.xml`,
+4. Verificación de `dist/`: `index.html`, `robots.txt`, `sitemap-index.xml`,
    `og-image.png`, `apple-touch-icon.png` y el PDF del CV.
 
 El workflow **no despliega y no tiene secrets** (`permissions: contents: read`).
@@ -66,8 +69,12 @@ make deploy MSG="fix: mobile scroll"
 ```
 
 1. **Build** - `pnpm build` genera `dist/`
-2. **Git** - `add` + `commit` + `push` a `origin/main`
+2. **Git** - `add` + `commit` + `push` a `origin/main` (lista los archivos a
+   commitear y bloquea `.env`/`acckey.txt`/`salida.txt`)
 3. **Deploy** - Sube `dist/` a `/srv/portfolio/dist` en el VPS vía SSH y Caddy lo sirve
+4. **Purge** - Purga la caché de Cloudflare (requiere `CLOUDFLARE_API_TOKEN` y
+   `CLOUDFLARE_ZONE_ID` en el entorno)
+5. **Verify** - `curl` al sitio: con la caché purgada, el 200 refleja el build recién subido
 
 ### Modelo (GitOps de escritura única)
 

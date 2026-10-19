@@ -31,6 +31,16 @@ build: ## Construye el sitio (genera dist/)
 push: ## Commit + push a GitHub (requiere MSG="descripción")
 	@test -n "$(MSG)" || { echo "ERROR: falta MSG=... p.ej. make deploy MSG=\"fix: texto\""; exit 1; }
 	git add -A
+	# Guardia: lista lo que se commitea y bloquea archivos sensibles (.env y
+	# congéneres), por si un gitignore incompleto los dejara al descubierto.
+	@if ! git diff --cached --quiet; then \
+	  echo ">> Archivos a commitear:"; \
+	  git diff --cached --name-status; \
+	  if git diff --cached --name-only | grep -qE '(^|/)(\.env|acckey\.txt|salida\.txt)'; then \
+	    echo "ERROR: archivos sensibles en el stage (.env, acckey.txt o salida.txt)"; \
+	    exit 1; \
+	  fi; \
+	fi
 	git diff --cached --quiet || git commit -m "$(MSG)"
 	git push $(GIT_REMOTE) $(GIT_BRANCH)
 
@@ -42,6 +52,7 @@ deploy: build push ## Build + push + subida al VPS (limpia el destino completo)
 	   && sudo chown -R $(REMOTE_OWNER):$(REMOTE_OWNER) $(REMOTE_DIR) \
 	   && sudo find $(REMOTE_DIR) -type f -exec chmod 644 {} + \
 	   && sudo find $(REMOTE_DIR) -type d -exec chmod 755 {} +'
+	@$(MAKE) purge
 	@$(MAKE) verify
 
 verify: ## Comprueba que el sitio responde 200

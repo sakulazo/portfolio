@@ -10,8 +10,13 @@ interface Props {
 const {
   title = "Lucas Sánchez | Desarrollador Web · SDD & Automatización con IA",
   description = "Técnico Superior en Desarrollo Web especializado en SDD, automatización con IA y desarrollo de aplicaciones web con PHP, Laravel y JavaScript.",
-  ogImage = "https://portfolio.sakulazo.com/og-image.png",
+  ogImage,
 } = Astro.props;
+
+// Fuente única de la URL pública: astro.config.mjs (`site`).
+const siteUrl = Astro.site ?? new URL('https://portfolio.sakulazo.com');
+const canonicalUrl = new URL('/', siteUrl).href;
+const ogImageUrl = ogImage ?? new URL('/og-image.png', siteUrl).href;
 ---
 
 <!DOCTYPE html>
@@ -33,13 +38,15 @@ const {
     <meta name="description" content={description} />
     <meta name="author" content="Lucas Sánchez" />
 
-    <link rel="canonical" href="https://portfolio.sakulazo.com/" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="robots" content="index, follow" />
 
-    <script>
+    <!-- is:inline obligatorio: como módulo diferido se ejecuta tarde y deja
+         ver un destello del tema incorrecto antes del primer pintado. -->
+    <script is:inline>
       (function () {
         var theme = localStorage.getItem('theme');
         if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -52,8 +59,8 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:url" content="https://portfolio.sakulazo.com/" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:locale" content="es_ES" />
     <meta property="og:site_name" content="Lucas Sánchez — Portfolio" />
     <meta property="og:image:width" content="1200" />
@@ -63,7 +70,7 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://js.hcaptcha.com" crossorigin />
@@ -75,8 +82,8 @@ const {
       "@type": "Person",
       "name": "Lucas Sánchez",
       "jobTitle": "Desarrollador Web · SDD & Automatización con IA",
-      "url": "https://portfolio.sakulazo.com",
-      "image": "https://portfolio.sakulazo.com/og-image.png",
+      "url": siteUrl.origin,
+      "image": ogImageUrl,
       "sameAs": [
         "https://github.com/sakulazo",
         "https://www.linkedin.com/in/lucas-s%C3%A1nchez-dev"
@@ -91,7 +98,7 @@ const {
         "SDD",
         "Automatización con IA"
       ],
-      "knowsLanguage": ["es", "en"],
+      "knowsLanguage": "es",
       "alumniOf": "DAW"
     })}>
     </script>
@@ -164,7 +171,10 @@ const {
 
     const formSection = document.getElementById('contacto');
     if (formSection) {
-      if ('IntersectionObserver' in window) {
+      // Boolean explícito: sin él TS estrecha `window` a `never` en el else
+      // (según lib.dom IntersectionObserver siempre existe).
+      const supportsIO: boolean = 'IntersectionObserver' in window;
+      if (supportsIO) {
         const obs = new IntersectionObserver(
           (entries) => {
             if (entries.some((e) => e.isIntersecting)) {

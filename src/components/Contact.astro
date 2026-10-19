@@ -173,7 +173,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
 
           form?.addEventListener('submit', (e) => {
             e.preventDefault();
-            const submitBtn = form.querySelector('button[type="submit"]');
+            const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
             const data = new FormData(form);
             const response = data.get('h-captcha-response');
             if (!response) {
@@ -198,7 +198,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
                   successMsg?.classList.remove('hidden');
                 } else {
                   alert(json.message || 'Ha ocurrido un error al enviar el mensaje.');
-                  const submitBtn = form.querySelector('button[type="submit"]');
+                  const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                   if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Enviar mensaje';
@@ -207,7 +207,7 @@ const { title, subtitle, formTitle, formName, formEmail, formMessage, formSubmit
               })
               .catch((err) => {
                 alert('Error de red al enviar el mensaje. Inténtalo de nuevo.');
-                const submitBtn = form.querySelector('button[type="submit"]');
+                const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
                 if (submitBtn) {
                   submitBtn.disabled = false;
                   submitBtn.textContent = 'Enviar mensaje';

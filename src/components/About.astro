@@ -59,7 +59,7 @@ const categories = [...new Set(site.skills.map((s) => s.category))];
               {site.skills
                 .filter((s) => s.category === category)
                 .map((skill) => (
-                  <div key={skill.name} class="pt-4">
+                  <div class="pt-4">
                     <span class="block font-medium text-gray-700 dark:text-slate-200 mb-1">{skill.name}</span>
                     <div class="h-2 bg-gray-200 dark:bg-slate-600 rounded-full overflow-hidden">
                       <div
