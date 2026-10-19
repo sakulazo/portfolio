@@ -25,6 +25,35 @@ Sitio web personal de portfolio desarrollado con Astro y Tailwind CSS.
 | `pnpm build`            | Genera el sitio estatico en `./dist/`        |
 | `pnpm preview`          | Previsualiza el build localmente             |
 | `make deploy MSG="..."` | Build + push + despliegue al VPS             |
+| `make purge`            | Purga la caché de Cloudflare                 |
+
+## CI/CD
+
+Cada push a `main`, cada pull request y cada ejecución manual disparan el workflow
+[CI](.github/workflows/ci.yml), que verifica que el sitio se construye y que los
+artefactos críticos existen:
+
+1. `pnpm install --frozen-lockfile` — dependencias reproducibles (falla si el
+   `package.json` y el lockfile no cuadran).
+2. `make build` — construye desde el Makefile, que es la fuente de verdad del
+   comando de construcción. Si cambia `BUILD_CMD`, el CI lo hereda.
+3. Verificación de `dist/`: `index.html`, `robots.txt`, `sitemap-index.xml`,
+   `og-image.png`, `apple-touch-icon.png` y el PDF del CV.
+
+El workflow **no despliega y no tiene secrets** (`permissions: contents: read`).
+El despliegue es manual y local: meter claves SSH en GitHub daría a cualquiera con
+permiso de push el control del VPS.
+
+### Cloudflare
+
+`make purge` invalida la caché del borde con `purge_everything` tras un despliegue.
+Requiere dos variables de entorno, que **nunca** van al repositorio:
+
+```bash
+export CLOUDFLARE_API_TOKEN=...   # permiso minimo: Zone > Cache Purge > Edit
+export CLOUDFLARE_ZONE_ID=...    # Zone ID del dominio en el panel de Cloudflare
+make purge
+```
 
 ## Despliegue
 
