@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Mínimo privilegio: este workflow solo LEE el repo. No despliega y no usa secrets.
+# El despliegue lo hace una persona desde su maquina con `make deploy`: meter claves
+# SSH en GitHub para que una action despliegue seria darle a cualquiera con un push el
+# control del VPS (ADR-0005 de infra-vps: sin secretos en el repo ni en CI).
+permissions:
+  contents: read
+
+# Un push nuevo cancela el run anterior del mismo ref: no malgastar minutos con
+# resultados que ya son obsoletos.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build y verificacion de artefactos
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ORDEN IMPORTANTE: pnpm ANTES que Node, porque setup-node usa el store de pnpm
+      # para el cache. Al reves el cache falla.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        # Sin `version:` a proposito: la action lee la del campo `packageManager`
+        # del package.json, de modo que subir pnpm alli actualiza el CI sin tocar aqui.
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22 # engines pide >=22.12.0
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      # `make build`, no `pnpm build`: el Makefile es la fuente de verdad del comando de
+      # construccion. Si cambias BUILD_CMD, el CI lo hereda y no puede divergir de local.
+      - name: Construir
+        run: make build
+
+      - name: Verificar artefactos criticos
+        run: |
+          set -uo pipefail
+          faltan=0
+          for f in index.html robots.txt sitemap-index.xml og-image.png \
+                   apple-touch-icon.png Lucas_Sanchez_Acosta_CV.pdf; do
+            if [ -f "dist/$f" ]; then
+              echo "OK    dist/$f"
+            else
+              echo "FALTA dist/$f"
+              faltan=1
+            fi
+          done
+          if [ "$faltan" -ne 0 ]; then
+            echo "::error::Faltan artefactos obligatorios en dist/"
+            exit 1
+          fi
