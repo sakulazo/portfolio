@@ -1,4 +1,6 @@
 # build output
+# dist/ lleva la clave del formulario ya inyectada en el HTML (ver Contact.astro):
+# nunca debe subirse al repo, solo al VPS con `make deploy`.
 dist/
 
 # generated types
@@ -14,9 +16,13 @@ yarn-error.log*
 pnpm-debug.log*
 
 # playwright mcp artifacts
+# Snapshots en texto plano con datos de contacto (telefono, email) repetidos:
+# ruido y pie de bala si algun dia se ignora mal. No se commitean.
 .playwright-mcp/
 
 # environment variables
+# PORTFOLIO_ACCESS_KEY (Web3Forms) vive aqui. No es un secreto real: viaja al
+# HTML publico por diseno, pero el archivo no se sube al repo.
 .env
 .env.production
 
