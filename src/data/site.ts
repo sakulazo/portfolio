@@ -64,10 +64,10 @@ Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las oper
       {
         title: 'GestTaller',
         description:
-          `Aplicación web para gestión integral de un lavadero de camiones y taller mecánico: control de clientes, vehículos, órdenes de trabajo, facturación y seguimiento de servicios. Desarrollada con FastAPI backend, React/TypeScript frontend, PostgreSQL, Docker y Alembic. Aproximadamente 18.000 líneas entre backend y frontend, 25 modelos, 49 suites de tests (pytest). La única experiencia entregada con cliente activo con alcance completo: desde definición de requisitos hasta despliegue y mantenimiento. Dos clientes.`,
+          `Aplicación web para gestión integral de un lavadero de camiones y taller mecánico: control de clientes, vehículos, órdenes de trabajo, facturación y seguimiento de servicios. Desarrollada con FastAPI backend, React/TypeScript frontend, PostgreSQL, Docker y Alembic. Aproximadamente 18.000 líneas entre backend y frontend, 25 modelos de dominio (23 tablas) y 24 módulos de test con 218 casos. Alcance completo: desde la definición de requisitos hasta el despliegue y el mantenimiento. Dos clientes, uno en la actualidad.`,
         techStack: ['FastAPI', 'Python', 'TypeScript', 'React', 'PostgreSQL', 'Docker', 'Alembic'],
         liveUrl: 'https://demo-gestaller.sakulazo.com',
-        repoUrl: 'https://github.com/sakulazo/gestaller-api',
+        repoUrl: 'https://github.com/sakulazo/gestaller-web',
         logo: '/gestaller-logo.svg',
       },
       {
@@ -94,7 +94,9 @@ Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las oper
           'Web corporativa de Silika Innovaciones del Vidrio S.L. (El Ejido, Almería), especializada en manipulación y transformación de vidrio plano, cerramientos, trabajos en pladur y reformas integrales.',
         techStack: ['Astro', 'JavaScript', 'HTML/CSS'],
         liveUrl: 'https://silika.sakulazo.com',
-        repoUrl: 'https://github.com/sakulazo/silika',
+        // El repositorio de Silika es privado: no se enlaza para no exponer un
+        // enlace roto a quien revise la tarjeta.
+        repoUrl: '',
         logo: '/silika-logo.svg',
       },
       {
@@ -103,7 +105,7 @@ Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las oper
           'Página personal del portfolio con currículum integrado, secciones informativas y enlaces a proyectos. Desarrollada con enfoque limpio y minimalista.',
         techStack: ['Astro', 'Tailwind', 'HTML/CSS'],
         liveUrl: 'https://sakulazo.com',
-        repoUrl: 'https://github.com/sakulazo/sakulazo.com',
+        repoUrl: 'https://github.com/sakulazo/portfolio',
         logo: '/sakulazo-logo.svg',
       },
       {
@@ -112,7 +114,7 @@ Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las oper
           'Dominio del conocimiento de sistemas de facturación en curso: especificaciones (~597 LOC de especificaciones, sin implementación todavía). Áreas de foco: numeración secuencial de facturas bajo concurrencia, facturas emitidas inmutables, snapshot de IVA congelado, validación NIF, generación de documentos legales españoles.',
         techStack: ['Especificaciones', 'FastAPI'],
         liveUrl: '',
-        repoUrl: '',
+        repoUrl: 'https://github.com/sakulazo/nucleo-facturacion',
         logo: '',
       },
     ],
@@ -122,14 +124,14 @@ Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las oper
     title: 'Experiencia',
     jobs: [
       {
-        company: 'Lavadero de camiones y taller mecánico (cliente freelance)',
-        position: 'Desarrollador Backend (Freelance)',
-        period: 'Activo',
+        company: 'Lavadero de camiones y taller mecánico · 2 clientes (1 activo)',
+        position: 'Desarrollador Fullstack (Freelance)',
+        period: 'jun. 2025 - Actualidad',
         description:
-          'Desarrollo backend freelance de alcance completo para un cliente lavadero de camiones y taller mecánico: requisitos, diseño, implementación, despliegue y mantenimiento. Aplicación FastAPI + React/TypeScript (~18.000 LOC, 25 modelos, 49 suites de tests) con PostgreSQL, Docker, Alembic y generación de documentos legales (facturas, certificados de estancia). Dos clientes activos.',
+          'Desarrollo freelance de alcance completo para dos clientes, uno en la actualidad: requisitos, diseño, implementación, despliegue y mantenimiento. Aplicación de gestión para un lavadero de camiones y taller mecánico en FastAPI + React/TypeScript (~18.000 LOC, 25 modelos de dominio, 24 módulos de test con 218 casos) con PostgreSQL, Docker, Alembic y generación de documentos legales (facturas, certificados de estancia).',
         achievements: [
-          'Construí backend FastAPI en producción que genera facturas y documentos legales (numeración, snapshot de IVA, validación NIF)',
-          'Entregué frontend React/TypeScript y despliegue Docker con Alembic migrations',
+          'Construí el backend FastAPI que genera facturas y documentos legales (numeración correlativa, snapshot de IVA, validación de NIF)',
+          'Entregué el frontend React/TypeScript y el despliegue en Docker con migraciones de Alembic',
           'Gestión completa del ciclo de vida: requisitos, diseño, entrega, despliegue y mantenimiento',
         ],
       },

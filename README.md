@@ -34,6 +34,27 @@ desactivado.
 - La foto se importa de `src/assets/yo_bien_cortado.png` (el mismo archivo que
   usa el hero del portfolio), no en base64 dentro del HTML.
 
+## CV para ATS (`/cv-ats`)
+
+Versión del currículum **para portales de empleo**, distinta del CV visual:
+una sola columna, sin foto, sin color, sin gráficos y sin tablas, con las
+palabras clave de las ofertas objetivo.
+
+| Artefacto | Ruta | Para qué sirve |
+| :-------- | :--- | :------------- |
+| Página | `/cv-ats` | Se imprime a PDF desde el navegador (botón «Imprimir / PDF») |
+| Texto plano | `/cv-ats.txt` | Se sube al portal o se pega en el formulario: es lo que mejor leen los parsers de ATS |
+
+- El contenido vive en `src/data/cv-ats.ts` y **el `.txt` se genera con
+  `toPlainText()` a partir de los mismos datos**, así que la página y el
+  archivo de texto no pueden desincronizarse.
+- Reglas que sigue, y por qué: nada en cabecera ni pie (muchos parsers lo
+  descartan), datos de contacto al principio del cuerpo, encabezados de
+  sección en mayúsculas, viñetas con `-`, fechas inequívocas (`jun. 2025 -
+  Actualidad`), texto seleccionable y nunca una imagen.
+- Solo se declaran aptitudes defendibles: cada cifra y cada tecnología del
+  documento se corresponde con código o con una operación real.
+
 ## Comandos
 
 | Comando                 | Accion                                       |

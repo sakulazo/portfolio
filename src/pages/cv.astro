@@ -14,7 +14,7 @@ const icons: Record<string, string> = {
     '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
 };
 
-const { header, skills, practice, education, profile, experience, projects } = cv;
+const { header, skills, practice, education, languages, profile, experience, projects } = cv;
 
 const contact = [
   { icon: 'location', label: 'Ubicación', value: header.location, href: null },
@@ -85,14 +85,14 @@ const contact = [
       color: #e8eef4;
     }
     .sidebar-inner {
-      padding-top: 18mm;
+      padding-top: 12mm;
     }
     /* Marco de la foto: mantiene el círculo (tamaño y borde) intacto y recorta
        la imagen por dentro para acercar el encuadre. */
     .photo-frame {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 14px auto;
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 12px auto;
       border-radius: 50%;
       border: 2.5px solid #6fa8d6;
       overflow: hidden;
@@ -118,24 +118,24 @@ const contact = [
       font-size: 9.3pt;
       color: #9fc6e8;
       font-weight: 600;
-      margin: 0 0 50px 0;
+      margin: 0 0 26px 0;
       line-height: 1.4;
     }
-    .side-block { text-align: left; margin-bottom: 32px; }
+    .side-block { text-align: left; margin-bottom: 20px; }
     .side-section-title {
-      font-size: 9pt;
+      font-size: 8.6pt;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.1px;
       color: #6fa8d6;
       font-weight: 700;
-      margin: 0 0 8px 0;
-      padding-bottom: 5px;
+      margin: 0 0 6px 0;
+      padding-bottom: 4px;
       border-bottom: 1px solid #2c4f70;
     }
     .contact-item {
-      font-size: 8.7pt;
+      font-size: 8.4pt;
       color: #dbe6f0;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       word-break: break-word;
     }
     .contact-item .label {
@@ -153,20 +153,20 @@ const contact = [
       height: 11px;
       flex-shrink: 0;
     }
-    .tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 4px; }
     .tag {
       background: #234a70;
       color: #d9e8f5;
-      font-size: 7.8pt;
-      padding: 3px 8px;
-      border-radius: 10px;
+      font-size: 7.2pt;
+      padding: 2px 6px;
+      border-radius: 9px;
     }
-    .skill-group { margin-bottom: 15px; }
+    .skill-group { margin-bottom: 10px; }
     .skill-group .g-label {
-      font-size: 8.3pt;
+      font-size: 8pt;
       color: #ffffff;
       font-weight: 700;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
     .practice {
       list-style: none;
@@ -176,9 +176,9 @@ const contact = [
     .practice li {
       position: relative;
       padding-left: 10px;
-      margin-bottom: 6px;
-      font-size: 8.4pt;
-      line-height: 1.35;
+      margin-bottom: 4px;
+      font-size: 8pt;
+      line-height: 1.3;
       color: #dbe6f0;
     }
     .practice li::before {
@@ -191,15 +191,35 @@ const contact = [
       border-radius: 50%;
       background: #6fa8d6;
     }
-    .edu-item { margin-bottom: 10px; }
+    .edu-item { margin-bottom: 7px; }
     .edu-item .e-title {
-      font-size: 8.8pt;
+      font-size: 8.5pt;
       font-weight: 700;
       color: #ffffff;
     }
     .edu-item .e-year {
-      font-size: 8pt;
+      font-size: 7.8pt;
       color: #8fb6d8;
+    }
+    /* Idiomas: idioma en blanco (peso) y nivel a la derecha, para que se lean
+       de un vistazo sin partir el bloque en dos líneas. */
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 8pt;
+      line-height: 1.3;
+      color: #dbe6f0;
+      margin-bottom: 3px;
+    }
+    .lang-item .l-lang {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .lang-item .l-level {
+      color: #8fb6d8;
+      text-align: right;
     }
 
     /* ---------- MAIN ---------- */
@@ -390,14 +410,14 @@ const contact = [
       /* 24mm: arranque bajo dentro de la hoja, con el contenido de la
          columna alineado visualmente con el bloque de contacto de la
          izquierda. */
-      padding: 24mm 10.5mm 6mm;
+      padding: 14mm 10.5mm 3mm;
     }
     /* Escala tipográfica de la columna derecha: cada nivel lleva su propio
        interlineado en lugar de heredarlo, que es lo que hace que el texto
        se vea desigual entre el perfil, las viñetas y los proyectos. */
-    .main-section { margin-bottom: 12px; }
+    .main-section { margin-bottom: 6px; }
     .main-section-title {
-      font-size: 12.5pt;
+      font-size: 11.5pt;
       line-height: 1.2;
       color: #16324f;
       font-weight: 700;
@@ -405,7 +425,7 @@ const contact = [
       /* 8px de aire antes de cada título de sección. El primero no lo lleva:
          debe seguir arrancando en el mismo punto que el bloque de contacto
          de la columna izquierda. */
-      margin: 8px 0 3px 0;
+      margin: 6px 0 2px 0;
       position: relative;
     }
     .main-section:first-child .main-section-title {
@@ -420,19 +440,19 @@ const contact = [
       margin-top: 6px;
       border-radius: 2px;
     }
-    .main-section-body { margin-top: 12px; }
+    .main-section-body { margin-top: 9px; }
 
     /* Cuerpo: mismo tamaño e interlineado en perfil, viñetas y proyectos. */
     p.profile-text {
       margin: 0;
-      font-size: 9.6pt;
-      line-height: 1.45;
+      font-size: 9.2pt;
+      line-height: 1.4;
       color: #3a3a3a;
     }
 
     /* Ritmo vertical: 12px entre secciones, 8px entre bloques, 4px entre
        ítems de una lista. */
-    .job { margin-bottom: 8px; }
+    .job { margin-bottom: 6px; }
     .job:last-child { margin-bottom: 0; }
     .job-head {
       display: flex;
@@ -442,7 +462,7 @@ const contact = [
     }
     .job-title {
       font-weight: 700;
-      font-size: 10.5pt;
+      font-size: 10pt;
       line-height: 1.25;
       color: #16324f;
     }
@@ -463,14 +483,14 @@ const contact = [
        que las dos secciones se lean igual. */
     ul.bullet-list {
       list-style: none;
-      margin: 7px 0 0 0;
-      padding-left: 18px;
+      margin: 5px 0 0 0;
+      padding-left: 17px;
     }
     ul.bullet-list li {
       position: relative;
-      margin-bottom: 4px;
-      font-size: 9.1pt;
-      line-height: 1.45;
+      margin-bottom: 3px;
+      font-size: 8.7pt;
+      line-height: 1.35;
       color: #3a3a3a;
     }
     ul.bullet-list li:last-child { margin-bottom: 0; }
@@ -487,11 +507,11 @@ const contact = [
       background: #6fa8d6;
     }
 
-    .proj { margin-bottom: 8px; }
+    .proj { margin-bottom: 6px; }
     .proj:last-child { margin-bottom: 0; }
     .proj-title {
       font-weight: 700;
-      font-size: 10.5pt;
+      font-size: 10pt;
       line-height: 1.25;
       color: #16324f;
     }
@@ -538,7 +558,7 @@ const contact = [
     <div class="sidebar-bg">
       <div class="sidebar-inner">
         <div class="photo-frame">
-          <img class="photo" src={foto.src} alt={header.name} width="130" height="130" />
+          <img class="photo" src={foto.src} alt={header.name} width="112" height="112" />
         </div>
         <h1>{header.name}</h1>
         <p class="role">{header.role}</p>
@@ -603,6 +623,15 @@ const contact = [
             <div class="edu-item">
               <div class="e-title">{item.title}</div>
               <div class="e-year">{item.year}</div>
+            </div>
+          ))}
+        </div>
+        <div class="side-block">
+          <div class="side-section-title">Idiomas</div>
+          {languages.map((item) => (
+            <div class="lang-item">
+              <span class="l-lang">{item.language}</span>
+              <span class="l-level">{item.level}</span>
             </div>
           ))}
         </div>

@@ -1,0 +1,291 @@
+---
+// src/pages/cv-ats.astro
+//
+// CV para ATS: una sola columna, sin foto, sin color, sin gráficos y sin
+// tablas. Es la versión que se imprime en PDF para subir a portales de
+// empleo, y la que enlaza con el .txt (ver src/pages/cv-ats.txt.ts).
+//
+// Reglas que sigue, y el motivo de cada una:
+//   - Nada en cabecera ni pie: muchos parsers de ATS descartan ese texto.
+//   - Los datos de contacto van al principio del cuerpo, en líneas de texto.
+//   - Los encabezados de sección en mayúsculas y sin numeración.
+//   - Viñetas con "-", sin rayas Unicode ni tabuladores.
+//   - Fechas inequívocas: "jun. 2025 - Actualidad".
+//   - Texto seleccionable: nunca una imagen.
+import { cvAts } from '../data/cv-ats';
+
+const { name, role, location, contact, profile, skills, experience, projects, education, languages } =
+  cvAts;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>{name} · Currículum para portales de empleo</title>
+  <meta name="description" content={`Currículum de ${name}, ${role}.`} />
+  <!-- Documento de trabajo: no se indexa para no competir con /cv. -->
+  <meta name="robots" content="noindex" />
+  <style>
+    /* El papel lo define @page; el resto va en el body para que el parser
+       del PDF reciba texto plano sin relieves ni fondos. */
+    @page { size: A4; margin: 13mm 15mm; }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f0f2f5;
+      color: #1a1a1a;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.35;
+    }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      padding: 16mm;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ---------- barra de acciones (no se imprime) ---------- */
+    .print-bar {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .print-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 9px 16px;
+      border: none;
+      border-radius: 6px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 1.2;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .print-btn:hover { background: #000; }
+    .print-btn:focus-visible { outline: 2px solid #1a1a1a; outline-offset: 2px; }
+    .print-btn svg { width: 15px; height: 15px; }
+
+    /* ---------- contenido ---------- */
+    header { margin-bottom: 11px; }
+    h1 {
+      font-size: 16pt;
+      line-height: 1.2;
+      font-weight: 700;
+      margin: 0 0 3px 0;
+      letter-spacing: 0.2px;
+    }
+    .role {
+      font-size: 10.5pt;
+      font-weight: 600;
+      margin: 0 0 2px 0;
+    }
+    .loc {
+      font-size: 9.5pt;
+      margin: 0 0 8px 0;
+    }
+    .contact { margin: 0; }
+    .contact div {
+      font-size: 9.5pt;
+      line-height: 1.35;
+      /* Los enlaces se muestran como texto plano: el parser necesita leer la
+         URL, no solo el texto del ancla. */
+      color: inherit;
+    }
+    .contact a { color: inherit; text-decoration: none; }
+
+    section { margin-bottom: 10px; }
+    h2 {
+      font-size: 10pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 0 0 5px 0;
+      padding-bottom: 2px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    p { margin: 0; }
+
+    ul { list-style: none; margin: 0; padding: 0; }
+    li {
+      position: relative;
+      padding-left: 12px;
+      margin-bottom: 2px;
+    }
+    li::before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .skill-line { margin-bottom: 3px; }
+    .skill-line .k { font-weight: 700; }
+
+    .job { margin-bottom: 8px; }
+    .job:last-child { margin-bottom: 0; }
+    .job-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0 10px;
+    }
+    .job-title { font-weight: 700; }
+    .job-period { font-size: 9pt; white-space: nowrap; }
+    .job-company { font-size: 9pt; margin-bottom: 3px; }
+
+    .proj { margin-bottom: 7px; }
+    .proj:last-child { margin-bottom: 0; }
+    .proj-title { font-weight: 700; }
+    .proj-stack { font-size: 9pt; margin-bottom: 2px; }
+
+    .edu, .lang { display: flex; justify-content: space-between; gap: 12px; }
+    .edu .year, .lang .level { font-size: 9pt; white-space: nowrap; }
+
+    /* ---------- impresión ---------- */
+    @media print {
+      html, body { background: #fff !important; }
+      .page {
+        width: auto;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+      .print-bar { display: none !important; }
+      /* Nada de bloques partidos entre dos páginas. */
+      section, .job, .proj, .edu, .lang { break-inside: avoid; page-break-inside: avoid; }
+    }
+
+    @media screen and (max-width: 60rem) {
+      .page { width: 100%; max-width: 560px; margin: 0 auto; padding: 20px; }
+      .print-bar { top: 12px; right: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-bar">
+    <a class="print-btn" href="/cv-ats.txt" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" x2="12" y1="15" y2="3"></line>
+      </svg>
+      Descargar .txt
+    </a>
+    <button type="button" class="print-btn" id="imprimir-cv-ats">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 9V2h12v7"></path>
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+        <rect x="6" y="14" width="12" height="8"></rect>
+      </svg>
+      Imprimir / PDF
+    </button>
+  </div>
+
+  <div class="page">
+    <header>
+      <h1>{name}</h1>
+      <p class="role">{role}</p>
+      <p class="loc">{location}</p>
+      <div class="contact">
+        {contact.map((item) => (
+          <div>
+            {item.label}:{' '}
+            {item.href ? (
+              <a href={item.href}>{item.value}</a>
+            ) : (
+              item.value
+            )}
+          </div>
+        ))}
+      </div>
+    </header>
+
+    <section>
+      <h2>Perfil profesional</h2>
+      <p>{profile}</p>
+    </section>
+
+    <section>
+      <h2>Aptitudes técnicas</h2>
+      {skills.map((group) => (
+        <div class="skill-line">
+          <span class="k">{group.label}:</span> {group.items.join(', ')}
+        </div>
+      ))}
+    </section>
+
+    <section>
+      <h2>Experiencia</h2>
+      {experience.map((job) => (
+        <div class="job">
+          <div class="job-head">
+            <span class="job-title">{job.title}</span>
+            <span class="job-period">{job.period}</span>
+          </div>
+          <div class="job-company">{job.company}</div>
+          <ul>
+            {job.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section>
+      <h2>Proyectos</h2>
+      {projects.map((project) => (
+        <div class="proj">
+          <div class="proj-title">{project.title}</div>
+          <div class="proj-stack">{project.stack.join(', ')}</div>
+          <ul>
+            {project.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section>
+      <h2>Formación</h2>
+      {education.map((item) => (
+        <div class="edu">
+          <span>{item.title}</span>
+          <span class="year">{item.year}</span>
+        </div>
+      ))}
+    </section>
+
+    <section>
+      <h2>Idiomas</h2>
+      {languages.map((item) => (
+        <div class="lang">
+          <span>{item.language}</span>
+          <span class="level">{item.level}</span>
+        </div>
+      ))}
+    </section>
+  </div>
+
+  <script>
+    document.getElementById('imprimir-cv-ats')?.addEventListener('click', () => window.print());
+  </script>
+</body>
+</html>

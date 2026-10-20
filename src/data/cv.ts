@@ -7,7 +7,7 @@
 export const cv = {
   header: {
     name: 'Lucas Sánchez Acosta',
-    role: 'Desarrollador Backend Python',
+    role: 'Desarrollador Fullstack (Python / TypeScript)',
     location: 'España · Remoto · Híbrido',
     phone: '+34 637449107',
     email: 'lucassanchezacosta@gmail.com',
@@ -18,21 +18,26 @@ export const cv = {
   skills: [
     {
       label: 'Lenguajes',
-      items: ['Python', 'PHP', 'JavaScript', 'TypeScript'],
+      items: ['Python', 'TypeScript', 'JavaScript', 'PHP', 'SQL', 'HTML5', 'CSS3', 'Bash'],
     },
     {
       label: 'Frameworks y datos',
-      items: ['FastAPI', 'React', 'Node.js', 'PostgreSQL', 'Docker', 'Alembic', 'Medusa'],
+      items: ['FastAPI', 'React', 'Next.js', 'SQLAlchemy', 'Pydantic', 'Alembic', 'PostgreSQL', 'MySQL', 'Redis', 'Docker', 'Medusa'],
     },
     {
       label: 'Sistemas',
-      items: ['Linux', 'Git', 'Bash', 'Hardening', 'Alta disponibilidad'],
+      items: ['Linux', 'Git', 'GitHub Actions', 'CI/CD', 'Caddy'],
+    },
+    {
+      label: 'Continuidad y seguridad',
+      items: ['Alta disponibilidad', 'Reinicio automático y healthchecks', 'Backups 3-2-1 con offsite', 'Test de restauración', 'Hardening y auditoría'],
     },
   ],
 
-  // Cómo se trabaja: tres líneas, no una lista de etiquetas.
+  // Cómo se trabaja: cuatro líneas, no una lista de etiquetas.
   practice: [
-    'Desarrollo guiado por especificaciones (SDD)',
+    'Desarrollo guiado por especificaciones (SDD) y decisiones arquitectónicas (ADR)',
+    'Arquitectura por capas, SOLID y TDD',
     'IA generativa y agentes en el ciclo de desarrollo',
     'Despliegue en producción con Docker y PostgreSQL',
   ],
@@ -45,36 +50,46 @@ export const cv = {
     },
   ],
 
+  // Niveles autodeclarados: el lector_cv no exige certificado y no se
+  // adjunta ninguno.
+  languages: [
+    { language: 'Español', level: 'Nativo' },
+    { language: 'Inglés', level: 'B2 (C1 en lectura)' },
+  ],
+
   profile:
-    'Técnico Superior en Desarrollo Web. Entrego backends Python (FastAPI) para clientes: ' +
-    'requisitos, diseño, PostgreSQL, Docker y despliegue en producción. Trabajo con desarrollo ' +
-    'guiado por especificaciones y automatización con IA generativa.',
+    'Técnico Superior en Desarrollo Web. Entrego backends y frontends a clientes ' +
+    'desde junio de 2025: requisitos, diseño, FastAPI y React/TypeScript, ' +
+    'PostgreSQL, Docker y despliegue en producción. Trabajo con IA generativa y ' +
+    'agentes, especificaciones y decisiones arquitectónicas documentadas.',
 
   experience: [
     {
-      title: 'Desarrollador Backend (Freelance)',
-      company: 'Lavadero de camiones y taller mecánico · 2 clientes',
-      period: 'Activo',
+      title: 'Desarrollador Fullstack (Freelance)',
+      company: 'Software de gestión a medida · 2 clientes (1 activo)',
+      period: 'jun. 2025 - Actualidad',
       bullets: [
-        'Aplicación de gestión completa (FastAPI + React/TypeScript): ~18.000 líneas, 25 modelos y 49 suites de tests sobre PostgreSQL.',
-        'Facturación legal española, escalable a Verifactu.',
-        'Despliegue en Docker con migraciones de Alembic y mantenimiento del sistema en producción.',
+        'Aplicación de gestión para un lavadero de camiones y taller mecánico (FastAPI + React/TypeScript): ~18.000 líneas, 25 modelos de dominio (23 tablas) y 24 módulos de test con 218 casos sobre PostgreSQL.',
+        'Backend FastAPI con SQLAlchemy 2.0, Pydantic v2 y Alembic: autenticación JWT (access y refresh), roles y permisos, CORS y rate limiting.',
+        'Frontend React 18 + TypeScript con TanStack Query, Zod, React Router y Tailwind CSS, con pruebas en Vitest.',
+        'Motor de facturación conforme a la normativa española: numeración correlativa serializada en transacción, snapshot de IVA congelado por línea, validación de NIF y facturas emitidas inmutables.',
+        'Despliegue en Docker y PostgreSQL 16 con Caddy, copias de seguridad y demo pública.',
+        'Segundo cliente activo: software a medida.',
       ],
     },
     {
       title: 'Gerente',
       company: 'Empresa de transporte internacional a temperatura controlada',
-      period: '2010 – 2020',
+      period: '2010 - 2020',
       bullets: [
         'Dirección de operaciones, flota, personal y finanzas.',
-        'Gestión comercial con clientes y proveedores.',
-        'Software de gestión, bolsa de viajes y productividad de oficina.',
+        'Uso de software de gestión de flota y bolsa de viajes como usuario final.',
       ],
     },
     {
       title: 'Consultor Informático y Soporte Técnico',
       company: 'Autónomo',
-      period: '2006 – 2010',
+      period: '2006 - 2010',
       bullets: [
         'Soporte y mantenimiento de sistemas para empresas y particulares, con resolución de incidencias complejas.',
         'Despliegue de entornos y formación técnica a usuarios.',
@@ -83,6 +98,16 @@ export const cv = {
   ],
 
   projects: [
+    {
+      title: 'Núcleo Facturación',
+      bullets: [
+        'Dominio de facturación en curso, sin implementar: ~600 líneas de especificación (SDD-first) sobre numeración correlativa bajo concurrencia, inmutabilidad de facturas y snapshot de IVA.',
+        'Capa de integración Veri*Factu diseñada: huellas, encadenamiento, código QR, reintentos y abstracción de proveedor.',
+      ],
+      stack: ['Especificaciones', 'FastAPI'],
+      url: 'https://github.com/sakulazo/nucleo-facturacion',
+      urlLabel: 'github.com/sakulazo/nucleo-facturacion',
+    },
     {
       title: 'La Tinta',
       bullets: [
@@ -96,20 +121,12 @@ export const cv = {
     {
       title: 'OpenCode Workbench',
       bullets: [
-        'Biblioteca personal de recursos para OpenCode: patrones, workflows de orquestación de agentes y decisiones arquitectónicas documentadas como ADR.',
+        'Biblioteca personal para OpenCode: patrones, workflows de orquestación de agentes y decisiones arquitectónicas documentadas (ADR).',
         'Sin código de aplicación: conocimiento y tooling reutilizable.',
       ],
       stack: ['OpenCode', 'SpecKit', 'ADR'],
       url: 'https://github.com/sakulazo/opencode-workbench',
       urlLabel: 'github.com/sakulazo/opencode-workbench',
-    },
-    {
-      title: 'Núcleo Facturación',
-      bullets: [
-        'Dominio de facturación en curso, sin implementar: ~600 líneas de especificación.',
-        'Área de foco: implementación Verifactu.',
-      ],
-      stack: ['Especificaciones', 'FastAPI'],
     },
   ],
 };
