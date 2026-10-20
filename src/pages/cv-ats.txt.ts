@@ -12,6 +12,11 @@ export const GET: APIRoute = () => {
   return new Response(toPlainText(), {
     headers: {
       'Content-Type': 'text/plain; charset=utf-8',
+      // Al pulsar la URL el navegador descarga el archivo en vez de mostrarlo.
+      // El nombre va sin acentos a propósito: es ASCII y así no depende de cómo
+      // lo interprete el cliente. El botón "Descargar .txt" de la página usa
+      // el atributo `download`, que tiene prioridad sobre esta cabecera.
+      'Content-Disposition': 'attachment; filename="CV_Lucas_Sanchez_Acoste.txt"',
     },
   });
 };
