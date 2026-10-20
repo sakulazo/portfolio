@@ -45,7 +45,7 @@ palabras clave de las ofertas objetivo.
 | Página | `/cv-ats` | Se imprime a PDF desde el navegador (botón «Imprimir / PDF») |
 | Texto plano | `/cv-ats.txt` | Se sube al portal o se pega en el formulario: es lo que mejor leen los parsers de ATS |
 
-- La descarga del `.txt` se llama **`CV_Lucas_Sanchez_Acoste.txt`**: lo fija el
+- La descarga del `.txt` se llama **`CV_Lucas_Sanchez_Acosta.txt`**: lo fija el
   atributo `download` del botón y, para quien abra la URL directamente, la
   cabecera `Content-Disposition` que añade Caddy (ver `infra-vps`, site block
   de `portfolio.sakulazo.com`). El sitio es estático, así que la cabecera del

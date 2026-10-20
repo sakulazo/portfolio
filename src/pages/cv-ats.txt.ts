@@ -16,7 +16,7 @@ export const GET: APIRoute = () => {
       // El nombre va sin acentos a propósito: es ASCII y así no depende de cómo
       // lo interprete el cliente. El botón "Descargar .txt" de la página usa
       // el atributo `download`, que tiene prioridad sobre esta cabecera.
-      'Content-Disposition': 'attachment; filename="CV_Lucas_Sanchez_Acoste.txt"',
+      'Content-Disposition': 'attachment; filename="CV_Lucas_Sanchez_Acosta.txt"',
     },
   });
 };
