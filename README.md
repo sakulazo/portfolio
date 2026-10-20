@@ -9,12 +9,21 @@ Sitio web personal de portfolio desarrollado con Astro y Tailwind CSS.
 ├── src/
 │   ├── components/     # Componentes Astro (Navbar, Hero, About, etc.)
 │   ├── layouts/        # Layout principal
-│   ├── pages/          # Paginas (index.astro)
+│   ├── pages/          # Paginas (index.astro, cv.astro)
 │   └── styles/         # Estilos globales (Tailwind)
-├── public/             # Assets estaticos (favicon, CV)
+├── public/             # Assets estaticos (favicon, iconos)
 ├── Makefile            # Despliegue (patrón GitOps, ver sección "Despliegue")
 └── package.json
 ```
+
+## Currículum (`/cv`)
+
+`src/pages/cv.astro` es una página A4 autocontenida. **No hay PDF pregenerado**:
+el botón «Imprimir / Guardar como PDF» abre el diálogo de impresión del
+navegador (`window.print()`), desde el que se puede guardar como PDF o enviar a
+la impresora. Los fondos se fuerzan con `print-color-adjust: exact` para que el
+lateral azul se imprima aunque el navegador tenga «Gráficos de fondo»
+desactivado.
 
 ## Comandos
 
@@ -40,8 +49,8 @@ artefactos críticos existen:
    scripts; falla si hay errores de tipos aunque el build no truene.
 3. `make build` — construye desde el Makefile, que es la fuente de verdad del
    comando de construcción. Si cambia `BUILD_CMD`, el CI lo hereda.
-4. Verificación de `dist/`: `index.html`, `robots.txt`, `sitemap-index.xml`,
-   `og-image.png`, `apple-touch-icon.png` y el PDF del CV.
+4. Verificación de `dist/`: `index.html`, `cv/index.html`, `robots.txt`,
+   `sitemap-index.xml`, `og-image.png` y `apple-touch-icon.png`.
 
 El workflow **no despliega y no tiene secrets** (`permissions: contents: read`).
 El despliegue es manual y local: meter claves SSH en GitHub daría a cualquiera con

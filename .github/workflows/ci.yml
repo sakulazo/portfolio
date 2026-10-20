@@ -59,8 +59,8 @@ jobs:
         run: |
           set -uo pipefail
           faltan=0
-          for f in index.html robots.txt sitemap-index.xml og-image.png \
-                   apple-touch-icon.png Lucas_Sanchez_Acosta_CV.pdf; do
+          for f in index.html cv/index.html robots.txt sitemap-index.xml og-image.png \
+                   apple-touch-icon.png; do
             if [ -f "dist/$f" ]; then
               echo "OK    dist/$f"
             else

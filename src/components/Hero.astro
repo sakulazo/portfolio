@@ -3,8 +3,8 @@ import { Image } from 'astro:assets';
 import { site } from '../data/site';
 import foto from '../assets/yo_bien_cortado.png';
 
-const { available, role, description, ctaText, contactText, cvUrl, techLabel } = site.hero;
-const roleParts = role.split(' & ');
+const { available, description, ctaText, contactText, cvUrl, techLabel } = site.hero;
+const role = "Desarrollador Backend Python";
 ---
 
 <section id="inicio" class="min-h-dvh flex items-center justify-center bg-white dark:bg-linear-to-br dark:from-slate-950 dark:to-slate-700 pt-20 pb-20 sm:pt-16 sm:pb-16 lg:pb-8 xl:pb-0">
@@ -15,7 +15,7 @@ const roleParts = role.split(' & ');
       {available}
     </div>
     <h1 class="mb-4">
-      <span class="sr-only">Lucas Sánchez — Desarrollador Web · SDD &amp; Automatización con IA</span>
+      <span class="sr-only">Lucas Sánchez — Desarrollador Backend Python</span>
       <img
         src="/logo-portfolio-horizonta-oscuro.svg"
         alt="Lucas Sánchez"
@@ -32,13 +32,7 @@ const roleParts = role.split(' & ');
       />
     </h1>
     <p class="text-2xl md:text-3xl text-blue-bright dark:text-blue-400 font-semibold mb-6 text-center">
-      {roleParts.length === 2 ? (
-        <>
-          {roleParts[0]} &<br class="md:hidden" /> {roleParts[1]}
-        </>
-      ) : (
-        role
-      )}
+      {role}
     </p>
     <p class="text-lg text-gray-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto text-left leading-relaxed">
       {description}
@@ -51,7 +45,6 @@ const roleParts = role.split(' & ');
         href={cvUrl}
         target="_blank"
         rel="noopener noreferrer"
-        data-cv-open
         class="w-full md:w-56 inline-flex items-center justify-center gap-2 bg-blue-strong text-white px-8 py-3.5 rounded-lg font-semibold border-2 border-blue-strong hover:bg-navy dark:bg-white dark:text-blue-strong dark:border-blue-strong dark:hover:bg-blue-strong dark:hover:text-white dark:shadow-none transition-colors shadow-lg shadow-blue-200 dark:shadow-blue-900/30 hover:shadow-blue-300"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
@@ -160,7 +153,7 @@ const roleParts = role.split(' & ');
       <div class="w-64 sm:w-80 lg:w-full max-w-sm drop-shadow-[0_20px_18px_rgba(30,58,95,0.8)] dark:drop-shadow-[0_0_18px_rgba(96,165,250,0.7)]">
         <Image
           src={foto}
-          alt="Lucas Sánchez, desarrollador web"
+          alt="Lucas Sánchez, desarrollador backend python"
           width={420}
           height={600}
           loading="eager"

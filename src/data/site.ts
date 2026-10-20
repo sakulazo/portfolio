@@ -1,11 +1,11 @@
 export const site = {
-  siteTitle: 'Lucas Sánchez | Desarrollador Web · SDD & Automatización con IA',
+  siteTitle: 'Lucas Sánchez Acosta · Backend Developer',
   siteDescription:
-    'Técnico Superior en Desarrollo Web, especializado en SDD, automatización con IA y desarrollo de aplicaciones web con PHP, Laravel y JavaScript.',
+    'Técnico Superior en Desarrollo Web. Especialista en backend Python, automatización con IA generativa y desarrollo de software entregado a clientes freelance.',
 
   nav: {
     links: [
-      { href: '#sobre-mi', label: 'Sobre Mí' },
+      { href: '#sobre-mi', label: 'Sobre mí' },
       { href: '#proyectos', label: 'Proyectos' },
       { href: '#experiencia', label: 'Experiencia' },
       { href: '#contacto', label: 'Contacto' },
@@ -13,70 +13,85 @@ export const site = {
   },
 
   hero: {
-    available: 'Explorando nuevas oportunidades',
-    role: 'Desarrollador Web · SDD & Automatización con IA',
+    available: 'Buscando ofertas remotas de backend',
+    role: 'Backend Python Developer',
     description:
-      'Técnico Superior en Desarrollo Web. Combino infraestructura Linux, automatización con IA generativa y buenas prácticas de desarrollo para construir soluciones web eficientes y bien documentadas.',
+      'Técnico Superior en Desarrollo Web con experiencia entregando aplicaciones Python (FastAPI) a clientes freelance, con PostgreSQL, Docker y despliegues en producción. Trabajo con automatización con IA generativa y diseño de dominio.',
     ctaText: 'Proyectos',
     contactText: 'Contáctame',
-    cvUrl: '/Lucas_Sanchez_Acosta_CV.pdf',
+    cvUrl: '/cv',
     techLabel: 'Stack Tecnológico',
     technologies: ['Python', 'Laravel', 'JavaScript', 'Node.js', 'Tailwind', 'React'],
   },
 
   about: {
     title: 'Sobre mí',
-    bio: `Técnico Superior en Desarrollo Web con formación técnica en sistemas informáticos y una trayectoria previa en dirección empresarial y consultoría IT.
+    bio: `Técnico Superior en Desarrollo Web con formación técnica en sistemas informáticos y experiencia en consultoría IT y soporte. Actualmente entrego aplicaciones Python (FastAPI) a clientes freelance, con PostgreSQL, Docker, despliegues en producción y automatización con IA generativa.
 
-Mi enfoque actual se centra en el desarrollo guiado por especificaciones (SDD) y el uso estratégico de IA generativa para optimizar el ciclo de vida del software. Gestiono mi propia infraestructura Linux en VPS con Docker, hardening y alta disponibilidad, y automatizo despliegues con Bash.
-
-Anteriormente, durante más de 10 años dirigí una empresa de transportes internacionales, donde desarrollé habilidades de gestión, liderazgo y resolución de problemas que hoy aplico al desarrollo de software.`,
+Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las operaciones de negocio real) con desarrollo práctico. Construyo software que resuelve problemas reales de clientes, lo documento y lo entrego mantenible dentro de plazos y presupuestos.`,
     badges: [
       { icon: 'graduation', text: 'DAW · 2026' },
-      { icon: 'gear', text: 'Automatización SDLC' },
-      { icon: 'brain', text: 'SDD & Agentes IA' },
+      { icon: 'gear', text: 'Linux · Docker' },
     ],
     skillsTitle: 'Enfoque Tecnológico',
   },
 
   skills: [
-    { name: 'Python', level: 8.3, category: 'STACKs' },
-    { name: 'React', level: 8, category: 'STACKs' },
-    { name: 'JavaScript', level: 9, category: 'STACKs' },
-    { name: 'API REST', level: 9, category: 'STACKs' },
-    { name: 'SDD', level: 9.1, category: 'Metodologías' },
-    { name: 'Desarrollo Asistido por IA', level: 9, category: 'Metodologías' },
-    { name: 'Automatización SDLC', level: 8, category: 'Metodologías' },
-    { name: 'Multiagentes IA', level: 8.8, category: 'IA y Automatización' },
-    { name: 'OpenCode', level: 9.4, category: 'IA y Automatización' },
-    { name: 'Bash Scripting', level: 9, category: 'IA y Automatización' },
-    { name: 'Docker', level: 9.8, category: 'Sistemas e Infraestructura' },
-    { name: 'Linux', level: 9.7, category: 'Sistemas e Infraestructura' },
-    { name: 'Git', level: 9, category: 'Sistemas e Infraestructura' },
-    { name: 'Hardening & Firewalling', level: 9.5, category: 'Sistemas e Infraestructura' },
+    { name: 'Python', category: 'STACKs' },
+    { name: 'React', category: 'STACKs' },
+    { name: 'JavaScript', category: 'STACKs' },
+    { name: 'API REST', category: 'STACKs' },
+    { name: 'SDD', category: 'Metodologías' },
+    { name: 'Desarrollo Asistido por IA', category: 'Metodologías' },
+    { name: 'Automatización SDLC', category: 'Metodologías' },
+    { name: 'Multiagentes IA', category: 'IA y Automatización' },
+    { name: 'OpenCode', category: 'IA y Automatización' },
+    { name: 'Bash Scripting', category: 'IA y Automatización' },
+    { name: 'Docker', category: 'Sistemas e Infraestructura' },
+    { name: 'Linux', category: 'Sistemas e Infraestructura' },
+    { name: 'Git', category: 'Sistemas e Infraestructura' },
+    { name: 'Hardening & Firewalling', category: 'Sistemas e Infraestructura' },
   ],
 
   projects: {
     title: 'Proyectos',
     subtitle:
-      'Aplicaciones web reales, desde la planificación hasta el despliegue en producción.',
+      'Aplicaciones reales entregadas a clientes, desde la planificación hasta el despliegue en producción.',
     demo: 'Demo',
     code: 'Código',
     visit: 'Ir a página',
     items: [
       {
-        title: 'GesTaller',
+        title: 'GestTaller',
         description:
-          'Aplicación web para la gestión integral de un lavadero de camiones y taller mecánico. Control de clientes, vehículos, órdenes de trabajo, facturación y seguimiento de servicios.',
-        techStack: ['FastAPI', 'Python', 'TypeScript', 'React', 'Tailwind', 'PostgreSQL', 'Docker'],
+          `Aplicación web para gestión integral de un lavadero de camiones y taller mecánico: control de clientes, vehículos, órdenes de trabajo, facturación y seguimiento de servicios. Desarrollada con FastAPI backend, React/TypeScript frontend, PostgreSQL, Docker y Alembic. Aproximadamente 18.000 líneas entre backend y frontend, 25 modelos, 49 suites de tests (pytest). La única experiencia entregada con cliente activo con alcance completo: desde definición de requisitos hasta despliegue y mantenimiento. Dos clientes.`,
+        techStack: ['FastAPI', 'Python', 'TypeScript', 'React', 'PostgreSQL', 'Docker', 'Alembic'],
         liveUrl: 'https://demo-gestaller.sakulazo.com',
-        repoUrl: 'https://github.com/sakulazo/gestaller-web',
+        repoUrl: 'https://github.com/sakulazo/gestaller-api',
         logo: '/gestaller-logo.svg',
+      },
+      {
+        title: 'Latinta',
+        description:
+          `Proyecto ecommerce en curso: backend Medusa v2 (Next.js storefront, PostgreSQL, Stripe payments, jobs programados, módulos custom, workflows). Monorepo Turborepo (apps/backend, apps/storefront). Desarrollado actualmente con colaborador, cubriendo catálogo, carrito, checkout, inventario, envío y devoluciones.`,
+        techStack: ['Medusa v2', 'Next.js', 'Stripe', 'PostgreSQL', 'Turborepo'],
+        liveUrl: '',
+        repoUrl: 'https://github.com/sakulazo/latinta',
+        logo: '',
+      },
+      {
+        title: 'OpenCode Workbench',
+        description:
+          `Biblioteca personal de recursos reutilizables para OpenCode: conocimiento conceptual, patrones tecnológicos específicos, workflows de orquestación de agentes y tooling. Decisiones arquitectónicas documentadas como ADR. Arquitectura conceptual, sin código de aplicación específico; evoluciona continuamente junto a OpenCode workflows y SpecKit.`,
+        techStack: ['OpenCode', 'SpecKit', 'Decisiones Arquitectónicas'],
+        liveUrl: '',
+        repoUrl: 'https://github.com/sakulazo/opencode-workbench',
+        logo: '',
       },
       {
         title: 'Silika',
         description:
-          'Web corporativa de Silika Innovaciones del Vidrio S.L. (El Ejido, Almería), especializada en el manipulado y transformación de vidrio plano, cerramientos, trabajos en pladur y reformas integrales.',
+          'Web corporativa de Silika Innovaciones del Vidrio S.L. (El Ejido, Almería), especializada en manipulación y transformación de vidrio plano, cerramientos, trabajos en pladur y reformas integrales.',
         techStack: ['Astro', 'JavaScript', 'HTML/CSS'],
         liveUrl: 'https://silika.sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/silika',
@@ -85,20 +100,20 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
       {
         title: 'sakulazo.com',
         description:
-          'Landing page personal con currículum integrado, secciones informativas y enlaces a proyectos. Desarrollada con un enfoque limpio y minimalista.',
-        techStack: ['Astro', 'Node', 'JavaScript', 'HTML/CSS'],
+          'Página personal del portfolio con currículum integrado, secciones informativas y enlaces a proyectos. Desarrollada con enfoque limpio y minimalista.',
+        techStack: ['Astro', 'Tailwind', 'HTML/CSS'],
         liveUrl: 'https://sakulazo.com',
         repoUrl: 'https://github.com/sakulazo/sakulazo.com',
         logo: '/sakulazo-logo.svg',
       },
       {
-        title: 'Refuerzo estudiantil',
+        title: 'Billing core',
         description:
-          'Web de clases particulares de refuerzo escolar especializadas en matemáticas, física y química. Niveles ESO, Bachillerato y CFGS, con más de 10 años de experiencia e índice de aprobados superior al 95%.',
-        techStack: ['Astro', 'Tailwind', 'HTML/CSS'],
-        liveUrl: 'https://clases.sakulazo.com',
-        repoUrl: 'https://github.com/sakulazo/clases',
-        logo: '/clases-logo-horizontal.svg',
+          'Dominio del conocimiento de sistemas de facturación en curso: especificaciones (~597 LOC de especificaciones, sin implementación todavía). Áreas de foco: numeración secuencial de facturas bajo concurrencia, facturas emitidas inmutables, snapshot de IVA congelado, validación NIF, generación de documentos legales españoles.',
+        techStack: ['Especificaciones', 'FastAPI'],
+        liveUrl: '',
+        repoUrl: '',
+        logo: '',
       },
     ],
   },
@@ -107,38 +122,37 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
     title: 'Experiencia',
     jobs: [
       {
-        company: 'Proyectos Personales / I+D+i',
-        position: 'Especialización en SDD y Automatización con IA',
-        period: 'Actualidad',
+        company: 'Lavadero de camiones y taller mecánico (cliente freelance)',
+        position: 'Desarrollador Backend (Freelance)',
+        period: 'Activo',
         description:
-          'Investigación y desarrollo de flujos de trabajo basados en especificaciones técnicas (SDD) asistidos por IA generativa local.',
+          'Desarrollo backend freelance de alcance completo para un cliente lavadero de camiones y taller mecánico: requisitos, diseño, implementación, despliegue y mantenimiento. Aplicación FastAPI + React/TypeScript (~18.000 LOC, 25 modelos, 49 suites de tests) con PostgreSQL, Docker, Alembic y generación de documentos legales (facturas, certificados de estancia). Dos clientes activos.',
         achievements: [
-          'Orquestación de agentes autónomos con OpenCode y Ollama para automatización de tareas de despliegue y monitoreo',
-          'Implementación de metodologías SDD donde la especificación técnica precisa es la base para la generación y validación de código',
-          'Desarrollo de aplicaciones web con enfoques híbridos de desarrollo asistido, desde la lógica de negocio hasta su contenerización y despliegue',
+          'Construí backend FastAPI en producción que genera facturas y documentos legales (numeración, snapshot de IVA, validación NIF)',
+          'Entregué frontend React/TypeScript y despliegue Docker con Alembic migrations',
+          'Gestión completa del ciclo de vida: requisitos, diseño, entrega, despliegue y mantenimiento',
         ],
       },
       {
-        company: 'Empresa de transportes internacionales a temperatura controlada',
+        company: 'Empresa de transporte internacional controlado por temperatura',
         position: 'Gerente',
         period: '2010 – 2020',
         description:
-          'Máximo responsable de la producción, flota de vehículos y resultados económicos de una empresa de transportes internacionales.',
+          'Gerente general de una empresa de transporte internacional con frío: operaciones, flota, RRHH, finanzas y rutas internacionales.',
         achievements: [
-          'Dirección general de la empresa, incluyendo gestión de flota, planificación de rutas y supervisión de operaciones internacionales',
-          'Administración de RRHH: selección, contratación y gestión del equipo de empleados',
-          'Gestión financiera y comercial: relación con clientes, supervisión de cuentas, pagos y cobros',
+          'Gestión general: operaciones, flota, RRHH, finanzas y relaciones comerciales',
+          'Uso experto de software de terceros para gestión de flota, bolsa de viajes y productividad de oficina',
         ],
       },
       {
-        company: 'Autónomo',
-        position: 'Consultor Informático y Técnico de Sistemas',
+        company: 'Consultor autónomo',
+        position: 'Consultor Informático y Soporte Técnico',
         period: '2006 – 2010',
         description:
           'Consultoría informática y soporte técnico para empresas y particulares.',
         achievements: [
           'Gestión integral de clientes, resolución de incidencias técnicas complejas y soporte microinformático',
-          'Mantenimiento de sistemas, despliegue de entornos y formación técnica a usuarios y empresas',
+          'Mantenimiento de sistemas, despliegue de entornos y formación técnica a usuarios',
         ],
       },
     ],
@@ -161,6 +175,6 @@ Anteriormente, durante más de 10 años dirigí una empresa de transportes inter
     copyright: 'Todos los derechos reservados.',
     legalTitle: 'Aviso legal',
     legalText:
-      'Titular: Lucas Sánchez Acosta. Contacto: lucassanchezacosta@gmail.com. Este sitio web es de carácter personal e informativo y tiene como finalidad dar a conocer el perfil profesional y los proyectos del titular. Los contenidos, textos, imágenes y código aquí mostrados son propiedad del titular, salvo indicación contraria, y no pueden reproducirse sin autorización. Los logotipos, marcas y nombres comerciales de tecnologías, empresas y productos mencionados o mostrados en este sitio son propiedad de sus respectivos titulares y se utilizan con fines meramente descriptivos o informativos. El titular no se responsabiliza del uso que se haga de la información publicada ni del contenido de los sitios externos enlazados. Para cualquier consulta puedes escribir a lucassanchezacosta@gmail.com.',
+      'Titular: Lucas Sánchez Acosta. Contacto: lucassanchezacosta@gmail.com. Este sitio web es personal e informativo y tiene como finalidad dar a conocer el perfil profesional y los proyectos del titular. Los contenidos, textos, imágenes y código aquí mostrados son propiedad del titular, salvo indicación contraria, y no pueden reproducirse sin autorización. Los logotipos, marcas y nombres comerciales de tecnologías, empresas y productos mencionados o mostrados en este sitio son propiedad de sus respectivos titulares y se utilizan con fines meramente descriptivos o informativos. El titular no se responsabiliza del uso que se haga de la información publicada ni del contenido de los sitios externos enlazados. Para cualquier consulta puedes escribir a lucassanchezacosta@gmail.com.',
   },
 };
