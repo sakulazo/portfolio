@@ -7,7 +7,7 @@
 export const cv = {
   header: {
     name: 'Lucas Sánchez Acosta',
-    role: 'Desarrollador Fullstack (Python / TypeScript)',
+    role: 'FullStack (Python / React)',
     location: 'España · Remoto · Híbrido',
     phone: '+34 637449107',
     email: 'lucassanchezacosta@gmail.com',
