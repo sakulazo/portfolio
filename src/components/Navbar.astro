@@ -17,7 +17,9 @@ const navIcons: Record<string, string> = {
       <img src="/logo-portfolio-horizonta-oscuro.svg" alt="Lucas Sánchez" class="h-9 w-auto dark:hidden" />
       <img src="/logo-portfolio-horizonta-claro.svg" alt="Lucas Sánchez" class="h-9 w-auto hidden dark:block" />
     </a>
-    <ul class="hidden md:flex items-center gap-8">
+    <!-- El gap se adapta al ancho de la página: se cierra en tablets (donde el
+         nav va justo) y se abre en pantallas grandes. -->
+    <ul class="hidden md:flex items-center gap-[clamp(0.75rem,3vw,6rem)]">
       {links.map((link) => (
         <li>
           <a

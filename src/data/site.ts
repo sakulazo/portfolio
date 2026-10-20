@@ -71,7 +71,7 @@ Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las oper
         logo: '/gestaller-logo.svg',
       },
       {
-        title: 'Latinta',
+        title: 'La Tinta',
         description:
           `Proyecto ecommerce en curso: backend Medusa v2 (Next.js storefront, PostgreSQL, Stripe payments, jobs programados, módulos custom, workflows). Monorepo Turborepo (apps/backend, apps/storefront). Desarrollado actualmente con colaborador, cubriendo catálogo, carrito, checkout, inventario, envío y devoluciones.`,
         techStack: ['Medusa v2', 'Next.js', 'Stripe', 'PostgreSQL', 'Turborepo'],
@@ -107,7 +107,7 @@ Mi enfoque combina el conocimiento de dominio (entender cómo funcionan las oper
         logo: '/sakulazo-logo.svg',
       },
       {
-        title: 'Billing core',
+        title: 'Núcleo Facturación',
         description:
           'Dominio del conocimiento de sistemas de facturación en curso: especificaciones (~597 LOC de especificaciones, sin implementación todavía). Áreas de foco: numeración secuencial de facturas bajo concurrencia, facturas emitidas inmutables, snapshot de IVA congelado, validación NIF, generación de documentos legales españoles.',
         techStack: ['Especificaciones', 'FastAPI'],

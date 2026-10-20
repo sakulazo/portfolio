@@ -25,6 +25,15 @@ la impresora. Los fondos se fuerzan con `print-color-adjust: exact` para que el
 lateral azul se imprima aunque el navegador tenga «Gráficos de fondo»
 desactivado.
 
+- El contenido vive en `src/data/cv.ts`, **deliberadamente independiente** de
+  `src/data/site.ts` (el portfolio): el CV puede cambiar de enfoque —o cambiar
+  el portfolio— sin que uno dependa del otro.
+- Impresión a dos páginas: la primera es la hoja A4 completa (lateral + perfil
+  + experiencia) y la segunda recoge la sección de proyectos. En pantalla, por
+  debajo de 900 px, el CV pasa a una columna con el lateral arriba.
+- La foto se importa de `src/assets/yo_bien_cortado.png` (el mismo archivo que
+  usa el hero del portfolio), no en base64 dentro del HTML.
+
 ## Comandos
 
 | Comando                 | Accion                                       |
